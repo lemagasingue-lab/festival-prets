@@ -315,13 +315,11 @@ button, .tile, .bi, .vpick-item, .ch, .resp-btn, .dest-btn {
 // ══════════════════════════════════════
 var GAS_DESKTOP='https://script.google.com/macros/s/AKfycbwC_6E4azD6ogRh-_hEm_xE8dl4NrcFdVkcXQL-RGiQpvy92gRztrtCOkNx-Sjxd3Fx/exec?mode=desktop';
 (function(){
-  // Ne pas rediriger si on vient déjà de GAS (évite la boucle)
-  if(window.location.search.indexOf('noredirect')>-1) return;
   var ua=navigator.userAgent.toLowerCase();
-  // Détection stricte mobile — exclut les PC même avec touch
-  var isMobile=/android|iphone|ipod/.test(ua) || 
-    (/ipad/.test(ua) && navigator.maxTouchPoints>1) ||
-    (window.innerWidth<=768 && /mobile/.test(ua));
+  // PC = pas de mot-clé mobile ET largeur > 1024px
+  var hasMobileKw=/android|iphone|ipad|ipod|mobile|tablet/.test(ua);
+  var isNarrow=window.innerWidth<=1024;
+  var isMobile=hasMobileKw||isNarrow;
   if(!isMobile){
     document.getElementById('redir-screen').className='show';
     document.querySelector('.hdr').style.display='none';
@@ -450,10 +448,10 @@ function loadAll(){
   apiGet('action=getVehicules',   function(d){ V=Array.isArray(d)?d:[]; lv=true; check(); });
   apiGet('action=getBenevoles',   function(d){ B=Array.isArray(d)?d:[]; renBenv(''); filterMBenv(''); });
   apiGet('action=getPrets',       function(d){ P=Array.isArray(d)?d:[]; lp=true; check(); renVehList(); });
-  apiGet('action=getPretsMatériel',function(d){ PM=Array.isArray(d)?d:[]; updHomeCounts(); renMatList(); });
+  apiGet('action=getPretsMateriel',function(d){ PM=Array.isArray(d)?d:[]; updHomeCounts(); renMatList(); });
 }
 function loadMat(){
-  apiGet('action=getPretsMatériel',function(d){ PM=Array.isArray(d)?d:[]; updHomeCounts(); renMatList(); });
+  apiGet('action=getPretsMateriel',function(d){ PM=Array.isArray(d)?d:[]; updHomeCounts(); renMatList(); });
 }
 
 // ══════════════════════════════════════
