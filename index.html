@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Prêts Festival</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -21,7 +20,6 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font-size:18px;overflow-x:hidden;}
-
 .hdr{background:var(--surf);border-bottom:2px solid var(--bord);padding:0 20px;display:flex;align-items:center;height:68px;position:sticky;top:0;z-index:100;gap:14px;}
 .bico{width:44px;height:44px;background:var(--acc);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .bico svg{fill:white;width:24px;height:24px;}
@@ -29,10 +27,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font
 .back-btn{display:none;align-items:center;gap:6px;padding:10px 16px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf2);font-family:inherit;font-size:17px;font-weight:600;color:var(--txt);cursor:pointer;white-space:nowrap;}
 .back-btn.show{display:flex;}
 .back-btn svg{width:20px;height:20px;fill:var(--txt);}
-
 .pg{display:none;padding:20px;min-height:calc(100vh - 68px);}
 .pg.on{display:block;}
-
 .tiles{display:flex;flex-direction:column;gap:16px;padding-top:8px;}
 .tile{display:flex;align-items:center;gap:20px;padding:28px 24px;background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);cursor:pointer;width:100%;font-family:inherit;text-align:left;}
 .tile:active{background:var(--acc-l);border-color:var(--acc);}
@@ -42,10 +38,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font
 .tile-ico.orange{background:var(--warn-b);}
 .tile-title{font-size:22px;font-weight:700;color:var(--txt);}
 .tile-desc{font-size:15px;color:var(--txt2);margin-top:4px;}
-.tile-count{margin-left:auto;font-size:32px;font-weight:700;color:var(--acc);flex-shrink:0;}
+.tile-count{margin-left:auto;font-size:32px;font-weight:700;flex-shrink:0;}
 .tile-count.warn{color:var(--warn);}
 .tile-count.ok{color:var(--ok);}
-
 .steps{display:flex;align-items:center;margin-bottom:24px;}
 .stn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;border:2px solid var(--bord);color:var(--txt2);background:var(--surf);flex-shrink:0;}
 .stp.on .stn{border-color:var(--acc);color:white;background:var(--acc);}
@@ -54,14 +49,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font
 .sp{display:none;}
 .sp.on{display:block;}
 .step-title{font-size:22px;font-weight:700;margin-bottom:20px;color:var(--txt);}
-
 .fg{margin-bottom:18px;}
 .fl{display:block;font-size:14px;font-weight:700;color:var(--txt2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
 .fc{width:100%;padding:18px 16px;border:2px solid var(--bord);border-radius:var(--r);background:var(--surf);font-family:inherit;font-size:20px;color:var(--txt);outline:none;}
 .fc:focus{border-color:var(--acc);}
 .fsec{background:var(--surf2);border-radius:var(--r);padding:18px;margin-bottom:16px;border:2px solid var(--bord);}
 .fst{font-size:14px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
-
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:20px 24px;border-radius:var(--r);border:none;cursor:pointer;font-family:inherit;font-size:20px;font-weight:600;width:100%;margin-bottom:12px;line-height:1;}
 .btn:last-child{margin-bottom:0;}
 .bp{background:var(--acc);color:white;}
@@ -70,7 +63,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font
 .bo{background:var(--ok-b);color:var(--ok);border:2px solid #A5DEC0;}
 .btn-row{display:flex;gap:12px;margin-top:4px;}
 .btn-row .btn{margin-bottom:0;}
-
 .vpick{border:2px solid var(--bord);border-radius:var(--r);overflow:hidden;max-height:400px;overflow-y:auto;}
 .vpick-item{display:flex;align-items:center;justify-content:space-between;padding:18px 16px;border-bottom:2px solid var(--bord);background:var(--surf);cursor:pointer;}
 .vpick-item:last-child{border-bottom:none;}
@@ -78,42 +70,34 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font
 .vpick-item.sel{background:var(--acc-l);border-left:4px solid var(--acc);}
 .vpick-lnde{font-weight:700;font-size:20px;}
 .vpick-type{font-size:15px;color:var(--txt2);margin-top:3px;}
-
 .bl{display:flex;flex-direction:column;gap:10px;max-height:380px;overflow-y:auto;}
 .bi{display:flex;align-items:center;gap:16px;padding:16px;border:2px solid var(--bord);border-radius:var(--r);cursor:pointer;background:var(--surf);}
 .bi.on{border-color:var(--acc);background:var(--acc-l);}
 .bav{width:52px;height:52px;border-radius:50%;background:var(--acc-l);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--acc-t);flex-shrink:0;}
 .bi-name{font-size:19px;font-weight:600;}
 .bi-comm{font-size:14px;color:var(--txt2);margin-top:3px;}
-
 .resp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .resp-btn{padding:22px 16px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:20px;font-weight:600;color:var(--txt);cursor:pointer;text-align:center;}
 .resp-btn.on{background:var(--acc);color:white;border-color:var(--acc);}
-
 .dest-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .dest-btn{padding:20px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:20px;font-weight:600;cursor:pointer;text-align:center;}
 .dest-btn.on-non{background:var(--acc);color:white;border-color:var(--acc);}
 .dest-btn.on-oui{background:var(--err);color:white;border-color:var(--err);}
-
 .bdg{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;}
 .bok{background:var(--ok-b);color:var(--ok);}
 .berr{background:var(--err-b);color:var(--err);}
 .bwarn{background:var(--warn-b);color:var(--warn);}
 .dot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;}
-
 .pc{background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);padding:18px;margin-bottom:14px;}
 .pc-veh{font-weight:700;font-size:22px;margin-bottom:4px;}
 .pc-sub{font-size:16px;color:var(--txt2);margin-bottom:10px;}
 .pc-info{font-size:16px;color:var(--txt2);line-height:2;margin-bottom:14px;}
 .pc-foot{display:flex;gap:10px;flex-wrap:wrap;}
 .pc-foot .btn{width:auto;flex:1;margin-bottom:0;padding:16px 20px;font-size:17px;}
-
 .ibox{padding:16px 18px;background:var(--acc-l);border-radius:var(--r);border:2px solid rgba(45,91,227,.2);font-size:17px;margin-bottom:16px;line-height:1.7;}
-
 .fb{display:flex;gap:10px;margin-bottom:16px;overflow-x:auto;}
 .ch{padding:12px 20px;border-radius:20px;border:2px solid var(--bord);background:var(--surf);font-size:16px;font-weight:600;color:var(--txt2);cursor:pointer;white-space:nowrap;}
 .ch.on{background:var(--acc-l);color:var(--acc-t);border-color:var(--acc);}
-
 .mo{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:flex-end;}
 .mo.hid{display:none;}
 .md{background:var(--surf);border-radius:24px 24px 0 0;width:100%;padding:28px 24px;}
@@ -121,7 +105,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font
 .mp{font-size:18px;color:var(--txt2);margin-bottom:4px;}
 .mf{display:flex;gap:12px;margin-top:22px;}
 .mf .btn{margin-bottom:0;}
-
 .emp{text-align:center;padding:40px 20px;color:var(--txt2);font-size:17px;}
 .ld{display:inline-block;width:22px;height:22px;border:3px solid var(--bord);border-top-color:var(--acc);border-radius:50%;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg);}}
@@ -130,9 +113,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font
 .toast.on{opacity:1;transform:translateY(0);}
 .toast.ok{background:var(--ok);}
 .toast.err{background:var(--err);}
+/* Écran de redirection PC */
+#redir-screen{display:none;position:fixed;inset:0;background:var(--bg);align-items:center;justify-content:center;flex-direction:column;gap:16px;font-size:18px;color:var(--txt2);}
+#redir-screen.show{display:flex;}
 </style>
 </head>
 <body>
+
+<!-- Écran affiché brièvement sur PC avant redirection -->
+<div id="redir-screen">
+  <div class="ld"></div>
+  <div>Redirection vers la version PC...</div>
+</div>
 
 <div class="hdr">
   <button class="back-btn" id="back-btn" onclick="goBack()">
@@ -321,15 +313,26 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font
 
 <script>
 // ══════════════════════════════════════
-// CONFIG — pointe vers ton Worker Cloudflare
+// DÉTECTION MOBILE — redirection PC
+// ══════════════════════════════════════
+var GAS_DESKTOP = 'https://script.google.com/macros/s/AKfycbwC_6E4azD6ogRh-_hEm_xE8dl4NrcFdVkcXQL-RGiQpvy92gRztrtCOkNx-Sjxd3Fx/exec?mode=desktop';
+(function(){
+  var ua = navigator.userAgent.toLowerCase();
+  var isMobile = /android|iphone|ipad|ipod|mobile|tablet/.test(ua);
+  if (!isMobile) {
+    document.getElementById('redir-screen').className='show';
+    document.querySelector('.hdr').style.display='none';
+    window.location.replace(GAS_DESKTOP);
+  }
+})();
+
+// ══════════════════════════════════════
+// CONFIG API
 // ══════════════════════════════════════
 var API = 'https://prets-proxy.lemagasingue.workers.dev';
 
-// ══════════════════════════════════════
-// APPELS API (remplacent google.script.run)
-// ══════════════════════════════════════
 function apiGet(action, callback, errCallback) {
-  fetch(API + '?action=' + action)
+  fetch(API + '?' + action)
     .then(function(r){ return r.json(); })
     .then(callback)
     .catch(function(e){ if(errCallback) errCallback(e); else toast('Erreur réseau','err'); });
@@ -380,14 +383,14 @@ function initDates(){
 function loadAll(){
   var lv=false,lp=false;
   function check(){ if(!lv||!lp)return; updHomeCounts(); filterVehList(''); }
-  apiGet('getVehicules', function(d){ V=Array.isArray(d)?d:[]; lv=true; check(); }, function(e){ toast('Err véhicules: '+e.message,'err'); });
-  apiGet('getBenevoles', function(d){ B=Array.isArray(d)?d:[]; renBenv(''); filterMBenv(''); });
-  apiGet('getPrets',     function(d){ P=Array.isArray(d)?d:[]; lp=true; check(); renVehList(); }, function(e){ toast('Err prêts: '+e.message,'err'); });
-  apiGet('getPretsMatériel', function(d){ PM=Array.isArray(d)?d:[]; updHomeCounts(); renMatList(); });
+  apiGet('action=getVehicules', function(d){ V=Array.isArray(d)?d:[]; lv=true; check(); });
+  apiGet('action=getBenevoles', function(d){ B=Array.isArray(d)?d:[]; renBenv(''); filterMBenv(''); });
+  apiGet('action=getPrets',     function(d){ P=Array.isArray(d)?d:[]; lp=true; check(); renVehList(); });
+  apiGet('action=getPretsMatériel', function(d){ PM=Array.isArray(d)?d:[]; updHomeCounts(); renMatList(); });
 }
 
 function loadMat(){
-  apiGet('getPretsMatériel', function(d){ PM=Array.isArray(d)?d:[]; updHomeCounts(); renMatList(); });
+  apiGet('action=getPretsMatériel', function(d){ PM=Array.isArray(d)?d:[]; updHomeCounts(); renMatList(); });
 }
 
 // ══════════════════════════════════════
@@ -414,7 +417,7 @@ function updateHeader(id){
     back.className='back-btn show';
     ico.style.display='none';
     var titles={
-      'pg-menu': curType==='veh'?'Véhicules':'Matériel',
+      'pg-menu':curType==='veh'?'Véhicules':'Matériel',
       'pg-veh-list':'Prêts véhicules',
       'pg-veh-new':'Nouveau prêt véhicule',
       'pg-mat-list':'Prêts matériel',
@@ -465,9 +468,6 @@ function goAction(action){
   }
 }
 
-// ══════════════════════════════════════
-// COMPTEURS ACCUEIL
-// ══════════════════════════════════════
 function updHomeCounts(){
   var ev=0,em=0;
   for(var i=0;i<P.length;i++) if(String(P[i].Statut||'').trim()==='En cours')ev++;
@@ -542,9 +542,6 @@ function pickVeh(idx){
   box.innerHTML='<strong>'+(lnde||selV.Plaque||'')+'</strong>'+(selV.Type?' — '+selV.Type:'')+(selV.Plaque?' &nbsp;·&nbsp; '+selV.Plaque:'');
 }
 
-// ══════════════════════════════════════
-// STEPS VÉH
-// ══════════════════════════════════════
 function vgos(n){
   for(var i=0;i<4;i++){
     document.getElementById('vsp'+i).className='sp'+(i===n?' on':'');
@@ -566,7 +563,7 @@ function chkDispo(){
   var dr=document.getElementById('dr').value,hr=document.getElementById('hr').value;
   if(!dd||!hd||!dr||!hr){showDM('Remplissez toutes les dates.',false);return;}
   if(new Date(dd+'T'+hd)>=new Date(dr+'T'+hr)){showDM('Le retour doit être après le départ.',false);return;}
-  apiGet('verifierDisponibilite&vehiculeId='+encodeURIComponent(selV.VehiculeID||selV.Plaque)
+  apiGet('action=verifierDisponibilite&vehiculeId='+encodeURIComponent(selV.VehiculeID||selV.Plaque)
     +'&dateDepart='+dd+'&heureDepart='+hd+'&dateRetour='+dr+'&heureRetour='+hr,
     function(r){
       if(r.disponible){
@@ -586,9 +583,6 @@ function showDM(msg,ok){
   e.textContent=msg;
 }
 
-// ══════════════════════════════════════
-// BÉNÉVOLES
-// ══════════════════════════════════════
 function renBenv(f){
   var c=document.getElementById('bl');if(!c)return;
   var items=[];
@@ -619,9 +613,6 @@ function renBenv(f){
 }
 function selBenv(i){selB=B[i];renBenv(document.getElementById('sb').value);}
 
-// ══════════════════════════════════════
-// RESPONSABLE VÉH
-// ══════════════════════════════════════
 function selectResp(nom){
   selResp=nom;
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){
@@ -632,9 +623,6 @@ function selectResp(nom){
   info.textContent=nom+' engage sa responsabilité pour ce prêt.';
 }
 
-// ══════════════════════════════════════
-// RECAP + VALIDATION VÉH
-// ══════════════════════════════════════
 function fmtD(d){if(!d)return'—';var p=String(d).split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d;}
 
 function buildRecap(){
@@ -682,9 +670,6 @@ function rstVehForm(){
   renBenv('');initDates();filterVehList('');
 }
 
-// ══════════════════════════════════════
-// LISTE VÉHICULES
-// ══════════════════════════════════════
 function setF(v,el){
   filt=v;
   document.querySelectorAll('#pg-veh-list .ch').forEach(function(c){c.className='ch';});
@@ -716,9 +701,6 @@ function renVehList(){
   c.innerHTML=h;
 }
 
-// ══════════════════════════════════════
-// LISTE MATÉRIEL
-// ══════════════════════════════════════
 function setMF(v,el){
   mFilt=v;
   document.querySelectorAll('#pg-mat-list .ch').forEach(function(c){c.className='ch';});
@@ -754,9 +736,6 @@ function renMatList(){
   c.innerHTML=h;
 }
 
-// ══════════════════════════════════════
-// NOUVEAU PRÊT MATÉRIEL
-// ══════════════════════════════════════
 function filterMBenv(f){
   var box=document.getElementById('mb-list');if(!box)return;
   var items=B;
@@ -839,9 +818,6 @@ function rstMatForm(){
   filterMBenv('');
 }
 
-// ══════════════════════════════════════
-// ACTIONS PRÊTS
-// ══════════════════════════════════════
 function tPret(btn){
   var id=btn.getAttribute('data-id');
   oMod('Terminer le prêt','Confirmer le retour du véhicule ?',
@@ -895,9 +871,6 @@ function doSuppMat(btn){
   });
 }
 
-// ══════════════════════════════════════
-// MODAL + TOAST
-// ══════════════════════════════════════
 function oMod(t,b,f){
   document.getElementById('m-title').textContent=t;
   document.getElementById('m-body').innerHTML=b;
