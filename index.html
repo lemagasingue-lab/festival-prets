@@ -200,11 +200,17 @@ button, .tile, .bi, .vpick-item, .ch, .resp-btn, .dest-btn {
     <div class="stp" id="vsi3"><div class="stn">4</div></div>
   </div>
   <div class="sp on" id="vsp0">
-    <div class="step-title">Choisir un véhicule</div>
-    <div class="fg"><input type="text" class="fc" id="veh-search" placeholder="🔍 Rechercher LNDE, type..." autocomplete="off"></div>
-    <div class="vpick" id="veh-pick"></div>
+    <div class="step-title">Numéro du véhicule</div>
+    <div class="fg">
+      <label class="fl">Numéro LNDE (1 à 68)</label>
+      <input type="number" class="fc" id="veh-num" min="1" max="68" placeholder="Ex: 12" autocomplete="off" style="font-size:32px;text-align:center;padding:22px;">
+    </div>
+    <button class="btn bp" id="btn-veh-chercher">🔍 Rechercher</button>
     <div id="v-info" style="display:none;margin-top:14px;" class="ibox"></div>
-    <div style="margin-top:16px;"><button class="btn bp" id="btn-vs1next">Suivant →</button></div>
+    <div id="v-confirm" style="display:none;margin-top:8px;">
+      <button class="btn bp" id="btn-vs1next">✔ Confirmer ce véhicule</button>
+      <button class="btn bs" id="btn-veh-rechanger">↩ Changer de numéro</button>
+    </div>
   </div>
   <div class="sp" id="vsp1">
     <div id="v-recap" class="ibox"></div>
@@ -226,8 +232,11 @@ button, .tile, .bi, .vpick-item, .ch, .resp-btn, .dest-btn {
   </div>
   <div class="sp" id="vsp2">
     <div class="step-title">Bénévole emprunteur</div>
-    <div class="fg"><input type="text" class="fc" id="sb" placeholder="🔍 Rechercher..." autocomplete="off"></div>
-    <div class="bl" id="bl"><div class="emp"><div class="ld"></div></div></div>
+    <div class="fg" style="display:flex;gap:10px;align-items:flex-end;">
+      <div style="flex:1"><label class="fl">Nom ou prénom</label><input type="text" class="fc" id="sb" placeholder="Taper au moins 2 lettres..." autocomplete="off"></div>
+      <button class="btn bp" id="btn-sb-chercher" style="width:auto;padding:18px 20px;margin-bottom:0;">🔍</button>
+    </div>
+    <div class="bl" id="bl" style="display:none;"></div>
     <div class="btn-row" style="margin-top:16px;">
       <button class="btn bs" id="btn-vsp2-back">← Retour</button>
       <button class="btn bp" id="btn-vs3next">Suivant →</button>
@@ -390,14 +399,17 @@ function bindAll(){
   onTap(document.getElementById('tile-new'),  function(){ goAction('new'); });
 
   // Steps véhicule
-  onTap(document.getElementById('btn-vs1next'),   function(){ vs1next(); });
-  onTap(document.getElementById('btn-chkdispo'),  function(){ chkDispo(); });
-  onTap(document.getElementById('btn-dispo-next'),function(){ vgos(2); });
-  onTap(document.getElementById('btn-vsp1-back'), function(){ vgos(0); });
-  onTap(document.getElementById('btn-vs3next'),   function(){ vs3next(); });
-  onTap(document.getElementById('btn-vsp2-back'), function(){ vgos(1); });
-  onTap(document.getElementById('btn-valveh'),    function(){ validerVeh(); });
-  onTap(document.getElementById('btn-vsp3-back'), function(){ vgos(2); });
+  onTap(document.getElementById('btn-veh-chercher'),  function(){ chercherVeh(); });
+  onTap(document.getElementById('btn-veh-rechanger'), function(){ rechangerVeh(); });
+  onTap(document.getElementById('btn-vs1next'),       function(){ vs1next(); });
+  onTap(document.getElementById('btn-chkdispo'),      function(){ chkDispo(); });
+  onTap(document.getElementById('btn-dispo-next'),    function(){ vgos(2); });
+  onTap(document.getElementById('btn-vsp1-back'),     function(){ vgos(0); });
+  onTap(document.getElementById('btn-sb-chercher'),   function(){ chercherBenv(); });
+  onTap(document.getElementById('btn-vs3next'),       function(){ vs3next(); });
+  onTap(document.getElementById('btn-vsp2-back'),     function(){ vgos(1); });
+  onTap(document.getElementById('btn-valveh'),        function(){ validerVeh(); });
+  onTap(document.getElementById('btn-vsp3-back'),     function(){ vgos(2); });
 
   // Responsables véhicule
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){
@@ -416,11 +428,12 @@ function bindAll(){
   // Valider matériel
   onTap(document.getElementById('btn-valmat'), function(){ validerMat(); });
 
-  // Recherche véhicule
-  document.getElementById('veh-search').addEventListener('input', function(){ filterVehList(this.value); });
-  // Recherche bénévoles
-  document.getElementById('sb').addEventListener('input', function(){ renBenv(this.value); });
+  // Recherche bénévoles matériel (input live)
   document.getElementById('mb-search').addEventListener('input', function(){ filterMBenv(this.value); });
+  // Enter sur champ numéro véhicule
+  document.getElementById('veh-num').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); chercherVeh(); } });
+  // Enter sur champ bénévole
+  document.getElementById('sb').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); chercherBenv(); } });
 }
 
 // ══════════════════════════════════════
@@ -428,7 +441,7 @@ function bindAll(){
 // ══════════════════════════════════════
 function loadAll(){
   var lv=false,lp=false;
-  function check(){ if(!lv||!lp)return; updHomeCounts(); filterVehList(''); }
+  function check(){ if(!lv||!lp)return; updHomeCounts(); }
   apiGet('action=getVehicules',   function(d){ V=Array.isArray(d)?d:[]; lv=true; check(); });
   apiGet('action=getBenevoles',   function(d){ B=Array.isArray(d)?d:[]; renBenv(''); filterMBenv(''); });
   apiGet('action=getPrets',       function(d){ P=Array.isArray(d)?d:[]; lp=true; check(); renVehList(); });
@@ -509,36 +522,40 @@ function dispo(v){
 }
 
 // ══════════════════════════════════════
-// VÉHICULE PICKER
+// VÉHICULE PAR NUMÉRO
 // ══════════════════════════════════════
-function filterVehList(search){
-  var box=document.getElementById('veh-pick'); if(!box)return;
-  var items=V.slice();
-  if(search){ var f=search.toLowerCase(); items=[]; for(var i=0;i<V.length;i++){ var v=V[i],l=String(v['NuméroLNDE']||v.NumeroLNDE||'').toLowerCase(),t=String(v.Type||'').toLowerCase(),p=String(v.Plaque||'').toLowerCase(); if(l.indexOf(f)>-1||t.indexOf(f)>-1||p.indexOf(f)>-1)items.push(v); } }
-  if(!items.length){box.innerHTML='<div class="emp">Aucun véhicule</div>';return;}
-  box.innerHTML='';
-  for(var i=0;i<items.length;i++){
-    var v=items[i],ri=V.indexOf(v),lnde=v['NuméroLNDE']||v.NumeroLNDE||'',d=dispo(v),sel=selV&&V.indexOf(selV)===ri;
-    var el=document.createElement('div');
-    el.className='vpick-item'+(d?'':' ind')+(sel?' sel':'');
-    el.style.cursor=d?'pointer':'default';
-    el.innerHTML='<div>'
-      +'<div class="vpick-lnde" style="color:'+(sel?'var(--acc-t)':d?'var(--txt)':'#8B2020')+'">'+(lnde||v.Plaque||'—')+'</div>'
-      +'<div class="vpick-type">'+(v.Type||'')+(v.Carburant?' · '+v.Carburant:'')+(v.Plaque?' · '+v.Plaque:'')+'</div>'
-      +'</div>'
-      +'<span class="bdg '+(d?'bok':'berr')+'"><span class="dot"></span>'+(sel?' ✔':d?' Dispo':' Indispo')+'</span>';
-    if(d)(function(idx){ onTap(el, function(){ pickVeh(idx); }); })(ri);
-    box.appendChild(el);
+function chercherVeh(){
+  var num=String(document.getElementById('veh-num').value).trim();
+  if(!num){toast('Saisissez un numéro','err');return;}
+  var n=parseInt(num);
+  if(isNaN(n)||n<1||n>68){toast('Numéro entre 1 et 68','err');return;}
+  // Chercher dans V par NuméroLNDE
+  var found=null;
+  for(var i=0;i<V.length;i++){
+    var lnde=String(V[i]['NuméroLNDE']||V[i].NumeroLNDE||'').trim();
+    if(parseInt(lnde)===n){ found=V[i]; break; }
   }
-}
-function pickVeh(idx){
-  if(!dispo(V[idx])){toast('Véhicule indisponible','err');return;}
-  selV=V[idx];
-  filterVehList(document.getElementById('veh-search').value||'');
-  var lnde=selV['NuméroLNDE']||selV.NumeroLNDE||'';
+  if(!found){ toast('Véhicule '+n+' introuvable','err'); return; }
+  var d=dispo(found);
+  var lnde=found['NuméroLNDE']||found.NumeroLNDE||'';
   var box=document.getElementById('v-info');
   box.style.display='block';
-  box.innerHTML='<strong>'+(lnde||selV.Plaque||'')+'</strong>'+(selV.Type?' — '+selV.Type:'')+(selV.Plaque?' &nbsp;·&nbsp; '+selV.Plaque:'');
+  if(!d){
+    box.innerHTML='<span style="color:var(--err);font-weight:700;">⚠ Véhicule '+lnde+' actuellement indisponible</span><br>'+(found.Type||'')+(found.Plaque?' · '+found.Plaque:'');
+    document.getElementById('v-confirm').style.display='none';
+    selV=null;
+  } else {
+    box.innerHTML='<strong>Véhicule '+lnde+'</strong>'+(found.Type?' — '+found.Type:'')+(found.Plaque?' &nbsp;·&nbsp; '+found.Plaque:'')+(found.Carburant?' &nbsp;·&nbsp; '+found.Carburant:'');
+    document.getElementById('v-confirm').style.display='block';
+    selV=found;
+  }
+}
+function rechangerVeh(){
+  selV=null;
+  document.getElementById('veh-num').value='';
+  document.getElementById('v-info').style.display='none';
+  document.getElementById('v-confirm').style.display='none';
+  document.getElementById('veh-num').focus();
 }
 
 // ══════════════════════════════════════
@@ -575,11 +592,24 @@ function showDM(msg,ok){
 // ══════════════════════════════════════
 // BÉNÉVOLES
 // ══════════════════════════════════════
+function chercherBenv(){
+  var f=document.getElementById('sb').value.trim();
+  if(f.length<2){toast('Tapez au moins 2 lettres','err');return;}
+  renBenv(f);
+  document.getElementById('bl').style.display='flex';
+}
 function renBenv(f){
   var c=document.getElementById('bl'); if(!c)return;
   var items=[];
-  for(var i=0;i<B.length;i++){ var b=B[i]; if(!f){items.push({b:b,i:i});}else{ var fl=f.toLowerCase(),pr=b['Prénom']||b.Prenom||''; if((b.Nom||'').toLowerCase().indexOf(fl)>-1||pr.toLowerCase().indexOf(fl)>-1||(b.Commission||'').toLowerCase().indexOf(fl)>-1)items.push({b:b,i:i}); } }
-  if(!items.length){c.innerHTML="<div class='emp'>Aucun bénévole</div>";return;}
+  if(f){
+    var fl=f.toLowerCase();
+    for(var i=0;i<B.length;i++){
+      var b=B[i],pr=b['Prénom']||b.Prenom||'';
+      if((b.Nom||'').toLowerCase().indexOf(fl)>-1||pr.toLowerCase().indexOf(fl)>-1||(b.Commission||'').toLowerCase().indexOf(fl)>-1)
+        items.push({b:b,i:i});
+    }
+  }
+  if(!items.length){c.innerHTML="<div class='emp'>Aucun résultat pour ""+f+""</div>";return;}
   c.innerHTML='';
   for(var j=0;j<items.length;j++){
     var b=items[j].b,ri=items[j].i,pr=b['Prénom']||b.Prenom||'',ini=(pr.charAt(0)+(b.Nom||'').charAt(0)).toUpperCase(),sel=selB!==null&&B.indexOf(selB)===ri;
@@ -654,14 +684,16 @@ function validerVeh(){
 }
 function rstVehForm(){
   selV=null;selB=null;selResp=null; vgos(0);
-  var vs=document.getElementById('veh-search'); if(vs)vs.value='';
+  document.getElementById('veh-num').value='';
   document.getElementById('v-info').style.display='none';
+  document.getElementById('v-confirm').style.display='none';
   document.getElementById('dm').style.display='none';
   document.getElementById('btn-dispo-next').style.display='none';
   document.getElementById('sb').value='';
+  var bl=document.getElementById('bl'); bl.innerHTML=''; bl.style.display='none';
   document.getElementById('resp-info').style.display='none';
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){ document.getElementById('resp-'+n).className='resp-btn'; });
-  renBenv(''); initDates(); filterVehList('');
+  initDates();
 }
 
 // ══════════════════════════════════════
