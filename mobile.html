@@ -21,9 +21,7 @@
 html,body{height:100%;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font-size:18px;overflow-x:hidden;}
 input,textarea{-webkit-user-select:text!important;user-select:text!important;-webkit-touch-callout:default!important;}
-
-button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-select:none;user-select:none;cursor:pointer;}
-
+button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-select:none;user-select:none;cursor:pointer;}
 .hdr{background:var(--surf);border-bottom:2px solid var(--bord);padding:0 20px;display:flex;align-items:center;height:68px;position:sticky;top:0;z-index:100;gap:14px;}
 .bico{width:44px;height:44px;background:var(--acc);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .bico svg{fill:white;width:24px;height:24px;}
@@ -31,10 +29,8 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
 .back-btn{display:none;align-items:center;gap:6px;padding:10px 16px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf2);font-family:inherit;font-size:17px;font-weight:600;color:var(--txt);cursor:pointer;white-space:nowrap;touch-action:manipulation;}
 .back-btn.show{display:flex;}
 .back-btn svg{width:20px;height:20px;fill:var(--txt);}
-
 .pg{display:none;padding:20px;min-height:calc(100vh - 68px);}
 .pg.on{display:block;}
-
 .tiles{display:flex;flex-direction:column;gap:16px;padding-top:8px;}
 .tile{display:flex;align-items:center;gap:20px;padding:28px 24px;background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);width:100%;font-family:inherit;text-align:left;}
 .tile:active{background:var(--acc-l);border-color:var(--acc);}
@@ -47,7 +43,6 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
 .tile-count{margin-left:auto;font-size:32px;font-weight:700;flex-shrink:0;pointer-events:none;}
 .tile-count.warn{color:var(--warn);}
 .tile-count.ok{color:var(--ok);}
-
 .steps{display:flex;align-items:center;margin-bottom:24px;}
 .stn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;border:2px solid var(--bord);color:var(--txt2);background:var(--surf);flex-shrink:0;}
 .stp.on .stn{border-color:var(--acc);color:white;background:var(--acc);}
@@ -56,14 +51,12 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
 .sp{display:none;}
 .sp.on{display:block;}
 .step-title{font-size:22px;font-weight:700;margin-bottom:20px;color:var(--txt);}
-
 .fg{margin-bottom:18px;}
 .fl{display:block;font-size:14px;font-weight:700;color:var(--txt2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
 .fc{width:100%;padding:18px 16px;border:2px solid var(--bord);border-radius:var(--r);background:var(--surf);font-family:inherit;font-size:20px;color:var(--txt);outline:none;}
 .fc:focus{border-color:var(--acc);}
 .fsec{background:var(--surf2);border-radius:var(--r);padding:18px;margin-bottom:16px;border:2px solid var(--bord);}
 .fst{font-size:14px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
-
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:20px 24px;border-radius:var(--r);border:none;font-family:inherit;font-size:20px;font-weight:600;width:100%;margin-bottom:12px;line-height:1;touch-action:manipulation;-webkit-user-select:none;user-select:none;}
 .btn:last-child{margin-bottom:0;}
 .btn:active{opacity:.85;}
@@ -73,7 +66,6 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
 .bo{background:var(--ok-b);color:var(--ok);border:2px solid #A5DEC0;}
 .btn-row{display:flex;gap:12px;margin-top:4px;}
 .btn-row .btn{margin-bottom:0;}
-
 .bl{display:flex;flex-direction:column;gap:10px;max-height:380px;overflow-y:auto;}
 .bi{display:flex;align-items:center;gap:16px;padding:16px;border:2px solid var(--bord);border-radius:var(--r);background:var(--surf);}
 .bi.on{border-color:var(--acc);background:var(--acc-l);}
@@ -81,33 +73,27 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
 .bav{width:52px;height:52px;border-radius:50%;background:var(--acc-l);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--acc-t);flex-shrink:0;pointer-events:none;}
 .bi-name{font-size:19px;font-weight:600;pointer-events:none;}
 .bi-comm{font-size:14px;color:var(--txt2);margin-top:3px;pointer-events:none;}
-
 .resp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .resp-btn{padding:22px 16px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:20px;font-weight:600;color:var(--txt);text-align:center;}
 .resp-btn.on{background:var(--acc);color:white;border-color:var(--acc);}
 .resp-btn:active{opacity:.85;}
-
 .dest-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .dest-btn{padding:20px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:20px;font-weight:600;text-align:center;}
 .dest-btn.on-non{background:var(--acc);color:white;border-color:var(--acc);}
 .dest-btn.on-oui{background:var(--err);color:white;border-color:var(--err);}
 .dest-btn:active{opacity:.85;}
-
 .bdg{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;pointer-events:none;}
 .bok{background:var(--ok-b);color:var(--ok);}
 .berr{background:var(--err-b);color:var(--err);}
 .bwarn{background:var(--warn-b);color:var(--warn);}
 .dot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;}
-
 .pc{background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);padding:18px;margin-bottom:14px;}
 .pc-veh{font-weight:700;font-size:22px;margin-bottom:4px;}
 .pc-sub{font-size:16px;color:var(--txt2);margin-bottom:10px;}
 .pc-info{font-size:16px;color:var(--txt2);line-height:2;margin-bottom:14px;}
 .pc-foot{display:flex;gap:10px;flex-wrap:wrap;}
 .pc-foot .btn{width:auto;flex:1;margin-bottom:0;padding:16px 20px;font-size:17px;}
-
 .ibox{padding:16px 18px;background:var(--acc-l);border-radius:var(--r);border:2px solid rgba(45,91,227,.2);font-size:17px;margin-bottom:16px;line-height:1.7;}
-
 .mo{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:flex-end;}
 .mo.hid{display:none;}
 .md{background:var(--surf);border-radius:24px 24px 0 0;width:100%;padding:28px 24px;}
@@ -115,7 +101,6 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
 .mp{font-size:18px;color:var(--txt2);margin-bottom:4px;}
 .mf{display:flex;gap:12px;margin-top:22px;}
 .mf .btn{margin-bottom:0;}
-
 .emp{text-align:center;padding:40px 20px;color:var(--txt2);font-size:17px;}
 .ld{display:inline-block;width:22px;height:22px;border:3px solid var(--bord);border-top-color:var(--acc);border-radius:50%;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg);}}
@@ -127,7 +112,6 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
 </style>
 </head>
 <body>
-
 <div class="hdr">
   <button class="back-btn" id="back-btn">
     <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Retour
@@ -180,8 +164,6 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
     <div class="stp" id="vsi2"><div class="stn">3</div></div><div class="ssep"></div>
     <div class="stp" id="vsi3"><div class="stn">4</div></div>
   </div>
-
-  <!-- Étape 1 : numéro véhicule -->
   <div class="sp on" id="vsp0">
     <div class="step-title">Numéro du véhicule</div>
     <div class="fg">
@@ -192,11 +174,11 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
     <div id="v-info" style="display:none;margin-top:14px;" class="ibox"></div>
     <div id="v-confirm" style="display:none;margin-top:8px;">
       <button class="btn bp" id="btn-vs1next">✔ Confirmer ce véhicule</button>
+    </div>
+    <div id="v-rechanger" style="display:none;margin-top:8px;">
       <button class="btn bs" id="btn-veh-rechanger">↩ Changer de numéro</button>
     </div>
   </div>
-
-  <!-- Étape 2 : dates -->
   <div class="sp" id="vsp1">
     <div id="v-recap" class="ibox"></div>
     <div class="step-title">Dates du prêt</div>
@@ -215,8 +197,6 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
     <button class="btn bp" id="btn-dispo-next" style="display:none">Suivant → Bénévole</button>
     <button class="btn bs" id="btn-vsp1-back">← Retour</button>
   </div>
-
-  <!-- Étape 3 : bénévole -->
   <div class="sp" id="vsp2">
     <div class="step-title">Bénévole emprunteur</div>
     <div class="fg" style="display:flex;gap:10px;align-items:flex-end;">
@@ -229,8 +209,6 @@ button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-
       <button class="btn bp" id="btn-vs3next">Suivant →</button>
     </div>
   </div>
-
-  <!-- Étape 4 : responsable -->
   <div class="sp" id="vsp3">
     <div class="step-title">Confirmer le prêt</div>
     <div id="v-recap-final" class="ibox"></div>
@@ -315,7 +293,6 @@ function apiPost(action,data,cb,err){
     .catch(function(e){if(err)err(e);else toast('Erreur réseau','err');});
 }
 
-// Helper tap robuste
 function onTap(el,fn){
   if(!el)return;
   var tapped=false;
@@ -326,24 +303,16 @@ function onTap(el,fn){
     setTimeout(function(){tapped=false;},400);
     fn(e);
   },{passive:false});
-  el.addEventListener('click',function(e){
-    if(tapped)return;
-    fn(e);
-  });
+  el.addEventListener('click',function(e){if(tapped)return;fn(e);});
 }
 
-// État
 var V=[],B=[],P=[],PM=[];
 var selV=null,selB=null,selResp=null;
 var selMBenv=null,selMResp=null,selDest='Non';
 var curType=null,navStack=[];
 var PAGES=['pg-home','pg-menu','pg-veh-list','pg-veh-new','pg-mat-list','pg-mat-new'];
 
-window.onload=function(){
-  initDates();
-  bindAll();
-  loadAll();
-};
+window.onload=function(){initDates();bindAll();loadAll();};
 
 function pad(n){return n<10?'0'+n:String(n);}
 function initDates(){
@@ -361,7 +330,6 @@ function bindAll(){
   onTap(document.getElementById('tile-mat'),function(){goType('mat');});
   onTap(document.getElementById('tile-list'),function(){goAction('list');});
   onTap(document.getElementById('tile-new'),function(){goAction('new');});
-  // Véhicule
   onTap(document.getElementById('btn-veh-chercher'),function(){chercherVeh();});
   onTap(document.getElementById('btn-veh-rechanger'),function(){rechangerVeh();});
   onTap(document.getElementById('btn-vs1next'),function(){vs1next();});
@@ -376,7 +344,6 @@ function bindAll(){
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){
     onTap(document.getElementById('resp-'+n),function(){selectResp(n);});
   });
-  // Matériel
   onTap(document.getElementById('btn-mb-chercher'),function(){chercherMBenv();});
   onTap(document.getElementById('mdest-non'),function(){setDest('Non');});
   onTap(document.getElementById('mdest-oui'),function(){setDest('Oui');});
@@ -384,7 +351,6 @@ function bindAll(){
     onTap(document.getElementById('mresp-'+n),function(){selectMResp(n);});
   });
   onTap(document.getElementById('btn-valmat'),function(){validerMat();});
-  // Enter sur les champs
   document.getElementById('veh-num').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherVeh();}});
   document.getElementById('sb').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherBenv();}});
   document.getElementById('mb-search').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherMBenv();}});
@@ -402,11 +368,9 @@ function loadMat(){
   apiGet('action=getPretsMateriel',function(d){PM=Array.isArray(d)?d:[];updHomeCounts();renMatList();});
 }
 
-// Navigation
 function showPage(id){
   PAGES.forEach(function(p){var el=document.getElementById(p);if(el)el.className='pg'+(p===id?' on':'');});
-  window.scrollTo(0,0);
-  updateHeader(id);
+  window.scrollTo(0,0);updateHeader(id);
 }
 function updateHeader(id){
   var back=document.getElementById('back-btn'),title=document.getElementById('hdr-title'),ico=document.getElementById('hdr-ico');
@@ -448,7 +412,6 @@ function updHomeCounts(){
   cm.textContent=em;cm.className='tile-count'+(em>0?' warn':' ok');
 }
 
-// Dispo locale
 function dispo(v){
   var vid=String(v.VehiculeID||'').trim(),plaque=String(v.Plaque||'').trim(),lnde=String(v['NuméroLNDE']||v.NumeroLNDE||'').trim();
   for(var i=0;i<P.length;i++){
@@ -461,7 +424,6 @@ function dispo(v){
   return true;
 }
 
-// Chercher véhicule par numéro
 function chercherVeh(){
   var num=String(document.getElementById('veh-num').value).trim();
   if(!num){toast('Saisissez un numéro','err');return;}
@@ -480,22 +442,30 @@ function chercherVeh(){
   if(!d){
     box.innerHTML='<span style="color:var(--err);font-weight:700;">⚠ Véhicule '+lnde+' indisponible</span><br>'+(found.Type||'')+(found.Plaque?' · '+found.Plaque:'');
     document.getElementById('v-confirm').style.display='none';
+    document.getElementById('v-rechanger').style.display='block';
     selV=null;
   } else {
     box.innerHTML='<strong>Véhicule '+lnde+'</strong>'+(found.Type?' — '+found.Type:'')+(found.Plaque?' &nbsp;·&nbsp; '+found.Plaque:'')+(found.Carburant?' &nbsp;·&nbsp; '+found.Carburant:'');
     document.getElementById('v-confirm').style.display='block';
+    document.getElementById('v-rechanger').style.display='none';
+    // Masquer le champ de saisie
+    document.getElementById('veh-num').style.display='none';
+    document.getElementById('btn-veh-chercher').style.display='none';
     selV=found;
   }
 }
 function rechangerVeh(){
   selV=null;
   document.getElementById('veh-num').value='';
+  document.getElementById('veh-num').style.display='';
+  document.getElementById('btn-veh-chercher').style.display='';
   document.getElementById('v-info').style.display='none';
   document.getElementById('v-confirm').style.display='none';
+  document.getElementById('v-rechanger').style.display='none';
+  document.getElementById('veh-num').focus();
 }
 function vs1next(){if(!selV){toast('Sélectionnez un véhicule','err');return;}vgos(1);}
 
-// Steps véhicule
 function vgos(n){
   for(var i=0;i<4;i++){
     document.getElementById('vsp'+i).className='sp'+(i===n?' on':'');
@@ -523,12 +493,10 @@ function showDM(msg,ok){
   e.style.border='2px solid '+(ok?'#A5DEC0':'#F5B4B0');e.textContent=msg;
 }
 
-// Bénévoles véhicule — recherche à la demande
 function chercherBenv(){
   var f=document.getElementById('sb').value.trim();
   if(f.length<2){toast('Tapez au moins 2 lettres','err');return;}
-  renBenv(f);
-  document.getElementById('bl').style.display='flex';
+  renBenv(f);document.getElementById('bl').style.display='flex';
 }
 function renBenv(f){
   var c=document.getElementById('bl');if(!c)return;
@@ -545,10 +513,16 @@ function renBenv(f){
     c.appendChild(el);
   }
 }
-function selBenv(i){selB=B[i];renBenv(document.getElementById('sb').value);}
+function selBenv(i){
+  selB=B[i];
+  // Masquer liste et champ, afficher juste le nom sélectionné
+  document.getElementById('bl').style.display='none';
+  document.getElementById('sb').style.display='none';
+  document.getElementById('btn-sb-chercher').style.display='none';
+  renBenv(document.getElementById('sb').value);
+}
 function vs3next(){if(!selB){toast('Sélectionnez un bénévole','err');return;}vgos(3);}
 
-// Responsable véhicule
 function selectResp(nom){
   selResp=nom;
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('resp-'+n).className='resp-btn'+(n===nom?' on':'');});
@@ -570,22 +544,25 @@ function validerVeh(){
     function(r){btn.textContent='✔ Valider le prêt';if(r.error)toast(r.error,'err');else{toast('Prêt enregistré !','ok');loadAll();navStack=['pg-home'];showPage('pg-home');}},
     function(e){toast('Erreur : '+e.message,'err');btn.textContent='✔ Valider le prêt';});
 }
-
 function rstVehForm(){
   selV=null;selB=null;selResp=null;vgos(0);
   document.getElementById('veh-num').value='';
+  document.getElementById('veh-num').style.display='';
+  document.getElementById('btn-veh-chercher').style.display='';
   document.getElementById('v-info').style.display='none';
   document.getElementById('v-confirm').style.display='none';
+  document.getElementById('v-rechanger').style.display='none';
   document.getElementById('dm').style.display='none';
   document.getElementById('btn-dispo-next').style.display='none';
   document.getElementById('sb').value='';
+  document.getElementById('sb').style.display='';
+  document.getElementById('btn-sb-chercher').style.display='';
   var bl=document.getElementById('bl');bl.innerHTML='';bl.style.display='none';
   document.getElementById('resp-info').style.display='none';
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('resp-'+n).className='resp-btn';});
   initDates();
 }
 
-// Listes — en cours uniquement
 function renVehList(){
   var c=document.getElementById('veh-list-content');if(!c)return;
   var list=[];
@@ -618,12 +595,10 @@ function renMatList(){
   c.querySelectorAll('.btn').forEach(function(btn){onTap(btn,function(e){btn.onclick&&btn.onclick(e);});});
 }
 
-// Matériel — bénévole recherche à la demande
 function chercherMBenv(){
   var f=document.getElementById('mb-search').value.trim();
   if(f.length<2){toast('Tapez au moins 2 lettres','err');return;}
-  filterMBenv(f);
-  document.getElementById('mb-list').style.display='flex';
+  filterMBenv(f);document.getElementById('mb-list').style.display='flex';
 }
 function filterMBenv(f){
   var box=document.getElementById('mb-list');if(!box)return;
@@ -642,10 +617,13 @@ function filterMBenv(f){
 }
 function pickMBenv(idx){
   selMBenv=B[idx];
-  filterMBenv(document.getElementById('mb-search').value);
   var pr=selMBenv['Prénom']||selMBenv.Prenom||'';
   var info=document.getElementById('mb-info');info.style.display='block';
   info.innerHTML='<strong>'+pr+' '+selMBenv.Nom+'</strong>'+(selMBenv.Commission?' &nbsp;·&nbsp; '+selMBenv.Commission:'');
+  // Masquer liste et champ recherche
+  document.getElementById('mb-list').style.display='none';
+  document.getElementById('mb-search').style.display='none';
+  document.getElementById('btn-mb-chercher').style.display='none';
 }
 function setDest(val){
   selDest=val;
@@ -671,17 +649,16 @@ function validerMat(){
 function rstMatForm(){
   selMBenv=null;selMResp=null;selDest='Non';
   document.getElementById('mb-search').value='';
+  document.getElementById('mb-search').style.display='';
+  document.getElementById('btn-mb-chercher').style.display='';
   document.getElementById('mb-info').style.display='none';
   var mbl=document.getElementById('mb-list');mbl.innerHTML='';mbl.style.display='none';
-  document.getElementById('mdesig').value='';
-  document.getElementById('minfo').value='';
-  document.getElementById('mqte').value=1;
+  document.getElementById('mdesig').value='';document.getElementById('minfo').value='';document.getElementById('mqte').value=1;
   document.getElementById('mresp-info').style.display='none';
   setDest('Non');
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('mresp-'+n).className='resp-btn';});
 }
 
-// Actions prêts
 function tPret(btn){var id=btn.getAttribute('data-id');oMod('Terminer le prêt','Confirmer le retour du véhicule ?','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm" data-id="'+id+'">✔ Confirmer</button>');bindModButtons(function(){apiPost('terminerPret',{pretId:id},function(r){if(r.error)toast(r.error,'err');else{toast('Terminé !','ok');loadAll();renVehList();}});});}
 function dPret(btn){var id=btn.getAttribute('data-id');oMod('Supprimer','Action irréversible. Confirmer ?','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bd" id="mod-confirm" data-id="'+id+'">Supprimer</button>');bindModButtons(function(){apiPost('supprimerPret',{pretId:id},function(r){if(r.error)toast(r.error,'err');else{toast('Supprimé','ok');loadAll();renVehList();}});});}
 function retourMat(btn){var id=btn.getAttribute('data-id');oMod('Retour matériel','Confirmer le retour du matériel ?','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm" data-id="'+id+'">✔ Confirmer</button>');bindModButtons(function(){apiPost('terminerPretMateriel',{id:id},function(r){if(r.error)toast(r.error,'err');else{toast('Retour enregistré !','ok');loadMat();renMatList();}});});}
