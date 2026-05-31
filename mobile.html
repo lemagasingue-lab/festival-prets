@@ -2,55 +2,702 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>Prêts Festival</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%;font-family:'DM Sans',sans-serif;}
-body{background:#F5F4F0;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-.wrap{width:100%;max-width:400px;}
-.logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:32px;}
-.bico{width:52px;height:52px;background:#2D5BE3;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.bico svg{fill:white;width:28px;height:28px;}
-.logo-txt{font-size:22px;font-weight:700;color:#1A1916;}
-.sub{text-align:center;font-size:16px;color:#6B6860;margin-bottom:32px;}
-.choices{display:flex;flex-direction:column;gap:16px;}
-.btn{display:flex;align-items:center;gap:20px;padding:26px 24px;background:white;border:2px solid #E0DDD6;border-radius:20px;cursor:pointer;text-decoration:none;transition:border-color .15s,background .15s;width:100%;}
-.btn:active,.btn:hover{border-color:#2D5BE3;background:#EEF2FD;}
-.btn-ico{width:60px;height:60px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
-.btn-ico.blue{background:#EEF2FD;}
-.btn-ico.green{background:#E8F5EE;}
-.btn-title{font-size:20px;font-weight:700;color:#1A1916;margin-bottom:4px;}
-.btn-desc{font-size:14px;color:#6B6860;}
-.arrow{margin-left:auto;font-size:22px;color:#9B9890;flex-shrink:0;}
+:root{
+  --bg:#F5F4F0;--surf:#FFF;--surf2:#EFEDE8;--bord:#E0DDD6;
+  --txt:#1A1916;--txt2:#6B6860;
+  --acc:#2D5BE3;--acc-l:#EEF2FD;--acc-t:#1A3A9C;
+  --ok:#1A7A4A;--ok-b:#E8F5EE;
+  --warn:#8A5A00;--warn-b:#FFF4D6;
+  --err:#C0392B;--err-b:#FDECEA;
+  --r:16px;--rl:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
+html,body{height:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font-size:18px;overflow-x:hidden;}
+input,textarea{-webkit-user-select:text!important;user-select:text!important;-webkit-touch-callout:default!important;}
+
+button,.tile,.bi,.vpick-item,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-select:none;user-select:none;cursor:pointer;}
+
+.hdr{background:var(--surf);border-bottom:2px solid var(--bord);padding:0 20px;display:flex;align-items:center;height:68px;position:sticky;top:0;z-index:100;gap:14px;}
+.bico{width:44px;height:44px;background:var(--acc);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bico svg{fill:white;width:24px;height:24px;}
+.htitle{font-weight:700;font-size:20px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.back-btn{display:none;align-items:center;gap:6px;padding:10px 16px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf2);font-family:inherit;font-size:17px;font-weight:600;color:var(--txt);cursor:pointer;white-space:nowrap;touch-action:manipulation;}
+.back-btn.show{display:flex;}
+.back-btn svg{width:20px;height:20px;fill:var(--txt);}
+
+.pg{display:none;padding:20px;min-height:calc(100vh - 68px);}
+.pg.on{display:block;}
+
+.tiles{display:flex;flex-direction:column;gap:16px;padding-top:8px;}
+.tile{display:flex;align-items:center;gap:20px;padding:28px 24px;background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);width:100%;font-family:inherit;text-align:left;}
+.tile:active{background:var(--acc-l);border-color:var(--acc);}
+.tile-ico{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;pointer-events:none;}
+.tile-ico.blue{background:var(--acc-l);}
+.tile-ico.green{background:var(--ok-b);}
+.tile-ico.orange{background:var(--warn-b);}
+.tile-title{font-size:22px;font-weight:700;color:var(--txt);pointer-events:none;}
+.tile-desc{font-size:15px;color:var(--txt2);margin-top:4px;pointer-events:none;}
+.tile-count{margin-left:auto;font-size:32px;font-weight:700;flex-shrink:0;pointer-events:none;}
+.tile-count.warn{color:var(--warn);}
+.tile-count.ok{color:var(--ok);}
+
+.steps{display:flex;align-items:center;margin-bottom:24px;}
+.stn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;border:2px solid var(--bord);color:var(--txt2);background:var(--surf);flex-shrink:0;}
+.stp.on .stn{border-color:var(--acc);color:white;background:var(--acc);}
+.stp.dn .stn{border-color:var(--ok);color:white;background:var(--ok);}
+.ssep{flex:1;height:2px;background:var(--bord);margin:0 6px;}
+.sp{display:none;}
+.sp.on{display:block;}
+.step-title{font-size:22px;font-weight:700;margin-bottom:20px;color:var(--txt);}
+
+.fg{margin-bottom:18px;}
+.fl{display:block;font-size:14px;font-weight:700;color:var(--txt2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
+.fc{width:100%;padding:18px 16px;border:2px solid var(--bord);border-radius:var(--r);background:var(--surf);font-family:inherit;font-size:20px;color:var(--txt);outline:none;}
+.fc:focus{border-color:var(--acc);}
+.fsec{background:var(--surf2);border-radius:var(--r);padding:18px;margin-bottom:16px;border:2px solid var(--bord);}
+.fst{font-size:14px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:20px 24px;border-radius:var(--r);border:none;font-family:inherit;font-size:20px;font-weight:600;width:100%;margin-bottom:12px;line-height:1;touch-action:manipulation;-webkit-user-select:none;user-select:none;}
+.btn:last-child{margin-bottom:0;}
+.btn:active{opacity:.85;}
+.bp{background:var(--acc);color:white;}
+.bs{background:var(--surf2);color:var(--txt);border:2px solid var(--bord);}
+.bd{background:var(--err-b);color:var(--err);border:2px solid #F5B4B0;}
+.bo{background:var(--ok-b);color:var(--ok);border:2px solid #A5DEC0;}
+.btn-row{display:flex;gap:12px;margin-top:4px;}
+.btn-row .btn{margin-bottom:0;}
+
+.bl{display:flex;flex-direction:column;gap:10px;max-height:380px;overflow-y:auto;}
+.bi{display:flex;align-items:center;gap:16px;padding:16px;border:2px solid var(--bord);border-radius:var(--r);background:var(--surf);}
+.bi.on{border-color:var(--acc);background:var(--acc-l);}
+.bi:active{background:var(--acc-l);}
+.bav{width:52px;height:52px;border-radius:50%;background:var(--acc-l);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--acc-t);flex-shrink:0;pointer-events:none;}
+.bi-name{font-size:19px;font-weight:600;pointer-events:none;}
+.bi-comm{font-size:14px;color:var(--txt2);margin-top:3px;pointer-events:none;}
+
+.resp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.resp-btn{padding:22px 16px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:20px;font-weight:600;color:var(--txt);text-align:center;}
+.resp-btn.on{background:var(--acc);color:white;border-color:var(--acc);}
+.resp-btn:active{opacity:.85;}
+
+.dest-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.dest-btn{padding:20px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:20px;font-weight:600;text-align:center;}
+.dest-btn.on-non{background:var(--acc);color:white;border-color:var(--acc);}
+.dest-btn.on-oui{background:var(--err);color:white;border-color:var(--err);}
+.dest-btn:active{opacity:.85;}
+
+.bdg{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;pointer-events:none;}
+.bok{background:var(--ok-b);color:var(--ok);}
+.berr{background:var(--err-b);color:var(--err);}
+.bwarn{background:var(--warn-b);color:var(--warn);}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;}
+
+.pc{background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);padding:18px;margin-bottom:14px;}
+.pc-veh{font-weight:700;font-size:22px;margin-bottom:4px;}
+.pc-sub{font-size:16px;color:var(--txt2);margin-bottom:10px;}
+.pc-info{font-size:16px;color:var(--txt2);line-height:2;margin-bottom:14px;}
+.pc-foot{display:flex;gap:10px;flex-wrap:wrap;}
+.pc-foot .btn{width:auto;flex:1;margin-bottom:0;padding:16px 20px;font-size:17px;}
+
+.ibox{padding:16px 18px;background:var(--acc-l);border-radius:var(--r);border:2px solid rgba(45,91,227,.2);font-size:17px;margin-bottom:16px;line-height:1.7;}
+
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:flex-end;}
+.mo.hid{display:none;}
+.md{background:var(--surf);border-radius:24px 24px 0 0;width:100%;padding:28px 24px;}
+.mt{font-size:22px;font-weight:700;margin-bottom:14px;}
+.mp{font-size:18px;color:var(--txt2);margin-bottom:4px;}
+.mf{display:flex;gap:12px;margin-top:22px;}
+.mf .btn{margin-bottom:0;}
+
+.emp{text-align:center;padding:40px 20px;color:var(--txt2);font-size:17px;}
+.ld{display:inline-block;width:22px;height:22px;border:3px solid var(--bord);border-top-color:var(--acc);border-radius:50%;animation:sp .7s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.dm-box{display:none;padding:16px;border-radius:var(--r);margin-bottom:14px;font-size:17px;font-weight:500;}
+.toast{position:fixed;bottom:24px;left:16px;right:16px;padding:18px 22px;border-radius:var(--r);font-size:18px;font-weight:600;z-index:999;opacity:0;transform:translateY(8px);transition:all .2s;background:var(--txt);color:white;text-align:center;}
+.toast.on{opacity:1;transform:translateY(0);}
+.toast.ok{background:var(--ok);}
+.toast.err{background:var(--err);}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="logo">
-    <div class="bico"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg></div>
-    <div class="logo-txt">Prêts Festival</div>
-  </div>
-  <div class="sub">Choisissez votre interface</div>
-  <div class="choices">
-    <a class="btn" href="https://script.google.com/macros/s/AKfycbwC_6E4azD6ogRh-_hEm_xE8dl4NrcFdVkcXQL-RGiQpvy92gRztrtCOkNx-Sjxd3Fx/exec?mode=desktop">
-      <div class="btn-ico blue">🖥️</div>
-      <div>
-        <div class="btn-title">Version PC</div>
-        <div class="btn-desc">Tableaux, signature Wacom, grand écran</div>
-      </div>
-      <div class="arrow">›</div>
-    </a>
-    <a class="btn" href="./mobile.html">
-      <div class="btn-ico green">📱</div>
-      <div>
-        <div class="btn-title">Version Mobile</div>
-        <div class="btn-desc">Interface tactile, grands boutons</div>
-      </div>
-      <div class="arrow">›</div>
-    </a>
+
+<div class="hdr">
+  <button class="back-btn" id="back-btn">
+    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Retour
+  </button>
+  <div class="bico" id="hdr-ico"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg></div>
+  <div class="htitle" id="hdr-title">Prêts Festival</div>
+</div>
+
+<!-- ACCUEIL -->
+<div id="pg-home" class="pg on">
+  <div class="tiles">
+    <button class="tile" id="tile-veh">
+      <div class="tile-ico blue">🚗</div>
+      <div><div class="tile-title">Véhicules</div><div class="tile-desc">Voitures, chariots, engins</div></div>
+      <div class="tile-count warn" id="cnt-veh"><div class="ld"></div></div>
+    </button>
+    <button class="tile" id="tile-mat">
+      <div class="tile-ico orange">📦</div>
+      <div><div class="tile-title">Matériel</div><div class="tile-desc">Outils, équipements, fournitures</div></div>
+      <div class="tile-count warn" id="cnt-mat"><div class="ld"></div></div>
+    </button>
   </div>
 </div>
+
+<!-- MENU -->
+<div id="pg-menu" class="pg">
+  <div class="tiles">
+    <button class="tile" id="tile-list">
+      <div class="tile-ico green">📋</div>
+      <div><div class="tile-title">Prêts en cours</div><div class="tile-desc" id="menu-list-desc">Voir et terminer</div></div>
+      <div class="tile-count warn" id="menu-cnt">—</div>
+    </button>
+    <button class="tile" id="tile-new">
+      <div class="tile-ico blue">➕</div>
+      <div><div class="tile-title">Nouveau prêt</div><div class="tile-desc" id="menu-new-desc">Créer un prêt</div></div>
+    </button>
+  </div>
+</div>
+
+<!-- LISTE VÉHICULES -->
+<div id="pg-veh-list" class="pg">
+  <div id="veh-list-content"><div class="emp"><div class="ld"></div></div></div>
+</div>
+
+<!-- NOUVEAU PRÊT VÉH -->
+<div id="pg-veh-new" class="pg">
+  <div class="steps">
+    <div class="stp on" id="vsi0"><div class="stn">1</div></div><div class="ssep"></div>
+    <div class="stp" id="vsi1"><div class="stn">2</div></div><div class="ssep"></div>
+    <div class="stp" id="vsi2"><div class="stn">3</div></div><div class="ssep"></div>
+    <div class="stp" id="vsi3"><div class="stn">4</div></div>
+  </div>
+
+  <!-- Étape 1 : numéro véhicule -->
+  <div class="sp on" id="vsp0">
+    <div class="step-title">Numéro du véhicule</div>
+    <div class="fg">
+      <label class="fl">Numéro LNDE (1 à 68)</label>
+      <input type="number" class="fc" id="veh-num" min="1" max="68" placeholder="Ex: 12" autocomplete="off" style="font-size:32px;text-align:center;padding:22px;">
+    </div>
+    <button class="btn bp" id="btn-veh-chercher">🔍 Rechercher</button>
+    <div id="v-info" style="display:none;margin-top:14px;" class="ibox"></div>
+    <div id="v-confirm" style="display:none;margin-top:8px;">
+      <button class="btn bp" id="btn-vs1next">✔ Confirmer ce véhicule</button>
+      <button class="btn bs" id="btn-veh-rechanger">↩ Changer de numéro</button>
+    </div>
+  </div>
+
+  <!-- Étape 2 : dates -->
+  <div class="sp" id="vsp1">
+    <div id="v-recap" class="ibox"></div>
+    <div class="step-title">Dates du prêt</div>
+    <div class="fsec">
+      <div class="fst">Départ</div>
+      <div class="fg"><label class="fl">Date</label><input type="date" class="fc" id="dd"></div>
+      <div class="fg"><label class="fl">Heure</label><input type="time" class="fc" id="hd"></div>
+    </div>
+    <div class="fsec">
+      <div class="fst">Retour prévu</div>
+      <div class="fg"><label class="fl">Date</label><input type="date" class="fc" id="dr"></div>
+      <div class="fg"><label class="fl">Heure</label><input type="time" class="fc" id="hr"></div>
+    </div>
+    <div class="dm-box" id="dm"></div>
+    <button class="btn bp" id="btn-chkdispo">Vérifier disponibilité</button>
+    <button class="btn bp" id="btn-dispo-next" style="display:none">Suivant → Bénévole</button>
+    <button class="btn bs" id="btn-vsp1-back">← Retour</button>
+  </div>
+
+  <!-- Étape 3 : bénévole -->
+  <div class="sp" id="vsp2">
+    <div class="step-title">Bénévole emprunteur</div>
+    <div class="fg" style="display:flex;gap:10px;align-items:flex-end;">
+      <div style="flex:1"><label class="fl">Nom ou prénom</label><input type="text" class="fc" id="sb" placeholder="Taper au moins 2 lettres..." autocomplete="off"></div>
+      <button class="btn bp" id="btn-sb-chercher" style="width:auto;padding:18px 20px;margin-bottom:0;">🔍</button>
+    </div>
+    <div class="bl" id="bl" style="display:none;"></div>
+    <div class="btn-row" style="margin-top:16px;">
+      <button class="btn bs" id="btn-vsp2-back">← Retour</button>
+      <button class="btn bp" id="btn-vs3next">Suivant →</button>
+    </div>
+  </div>
+
+  <!-- Étape 4 : responsable -->
+  <div class="sp" id="vsp3">
+    <div class="step-title">Confirmer le prêt</div>
+    <div id="v-recap-final" class="ibox"></div>
+    <div class="fg">
+      <label class="fl">Qui fait ce prêt ?</label>
+      <div class="resp-grid">
+        <button class="resp-btn" id="resp-Tef">Tef</button>
+        <button class="resp-btn" id="resp-Ced">Ced</button>
+        <button class="resp-btn" id="resp-Chris">Chris</button>
+        <button class="resp-btn" id="resp-Lorianne">Lorianne</button>
+      </div>
+      <div id="resp-info" style="display:none;margin-top:12px;" class="ibox"></div>
+    </div>
+    <button class="btn bp" id="btn-valveh">✔ Valider le prêt</button>
+    <button class="btn bs" id="btn-vsp3-back">← Retour</button>
+  </div>
+</div>
+
+<!-- LISTE MATÉRIEL -->
+<div id="pg-mat-list" class="pg">
+  <div id="mat-list-content"><div class="emp"><div class="ld"></div></div></div>
+</div>
+
+<!-- NOUVEAU PRÊT MAT -->
+<div id="pg-mat-new" class="pg">
+  <div class="step-title">Nouveau prêt matériel</div>
+  <div class="fg">
+    <label class="fl">Bénévole emprunteur</label>
+    <div style="display:flex;gap:10px;align-items:flex-end;">
+      <div style="flex:1"><input type="text" class="fc" id="mb-search" placeholder="Taper au moins 2 lettres..." autocomplete="off"></div>
+      <button class="btn bp" id="btn-mb-chercher" style="width:auto;padding:18px 20px;margin-bottom:0;">🔍</button>
+    </div>
+    <div class="bl" id="mb-list" style="display:none;margin-top:10px;max-height:220px;overflow-y:auto;border:2px solid var(--bord);border-radius:var(--r);"></div>
+    <div id="mb-info" style="display:none;margin-top:10px;" class="ibox"></div>
+  </div>
+  <div class="fg"><label class="fl">Désignation</label><input type="text" class="fc" id="mdesig" placeholder="Nom du matériel..." autocomplete="off"></div>
+  <div class="fg"><label class="fl">Info complémentaire</label><input type="text" class="fc" id="minfo" placeholder="Optionnel..." autocomplete="off"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;">
+    <div><label class="fl">Quantité</label><input type="number" class="fc" id="mqte" value="1" min="1"></div>
+    <div>
+      <label class="fl">Déstockage</label>
+      <div class="dest-row" style="margin-top:8px;">
+        <button class="dest-btn on-non" id="mdest-non">Non</button>
+        <button class="dest-btn" id="mdest-oui">Oui</button>
+      </div>
+    </div>
+  </div>
+  <div class="fg">
+    <label class="fl">Responsable de la saisie</label>
+    <div class="resp-grid">
+      <button class="resp-btn" id="mresp-Tef">Tef</button>
+      <button class="resp-btn" id="mresp-Ced">Ced</button>
+      <button class="resp-btn" id="mresp-Chris">Chris</button>
+      <button class="resp-btn" id="mresp-Lorianne">Lorianne</button>
+    </div>
+    <div id="mresp-info" style="display:none;margin-top:12px;" class="ibox"></div>
+  </div>
+  <button class="btn bp" id="btn-valmat">✔ Enregistrer le prêt</button>
+</div>
+
+<!-- MODAL -->
+<div class="mo hid" id="modal">
+  <div class="md">
+    <div class="mt" id="m-title"></div>
+    <div class="mp" id="m-body"></div>
+    <div class="mf" id="m-foot"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+var API='https://prets-proxy.lemagasingue.workers.dev';
+
+function apiGet(action,cb,err){
+  fetch(API+'?'+action)
+    .then(function(r){return r.json();}).then(cb)
+    .catch(function(e){if(err)err(e);else toast('Erreur réseau','err');});
+}
+function apiPost(action,data,cb,err){
+  fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:action,data:data})})
+    .then(function(r){return r.json();}).then(cb)
+    .catch(function(e){if(err)err(e);else toast('Erreur réseau','err');});
+}
+
+// Helper tap robuste
+function onTap(el,fn){
+  if(!el)return;
+  var tapped=false;
+  el.addEventListener('touchend',function(e){
+    e.preventDefault();
+    if(tapped)return;
+    tapped=true;
+    setTimeout(function(){tapped=false;},400);
+    fn(e);
+  },{passive:false});
+  el.addEventListener('click',function(e){
+    if(tapped)return;
+    fn(e);
+  });
+}
+
+// État
+var V=[],B=[],P=[],PM=[];
+var selV=null,selB=null,selResp=null;
+var selMBenv=null,selMResp=null,selDest='Non';
+var curType=null,navStack=[];
+var PAGES=['pg-home','pg-menu','pg-veh-list','pg-veh-new','pg-mat-list','pg-mat-new'];
+
+window.onload=function(){
+  initDates();
+  bindAll();
+  loadAll();
+};
+
+function pad(n){return n<10?'0'+n:String(n);}
+function initDates(){
+  var n=new Date(),r=new Date(n.getTime()+3600000);
+  var td=n.getFullYear()+'-'+pad(n.getMonth()+1)+'-'+pad(n.getDate());
+  document.getElementById('dd').value=td;
+  document.getElementById('hd').value=pad(n.getHours())+':'+pad(n.getMinutes());
+  document.getElementById('dr').value=td;
+  document.getElementById('hr').value=pad(r.getHours())+':'+pad(r.getMinutes());
+}
+
+function bindAll(){
+  onTap(document.getElementById('back-btn'),function(){goBack();});
+  onTap(document.getElementById('tile-veh'),function(){goType('veh');});
+  onTap(document.getElementById('tile-mat'),function(){goType('mat');});
+  onTap(document.getElementById('tile-list'),function(){goAction('list');});
+  onTap(document.getElementById('tile-new'),function(){goAction('new');});
+  // Véhicule
+  onTap(document.getElementById('btn-veh-chercher'),function(){chercherVeh();});
+  onTap(document.getElementById('btn-veh-rechanger'),function(){rechangerVeh();});
+  onTap(document.getElementById('btn-vs1next'),function(){vs1next();});
+  onTap(document.getElementById('btn-chkdispo'),function(){chkDispo();});
+  onTap(document.getElementById('btn-dispo-next'),function(){vgos(2);});
+  onTap(document.getElementById('btn-vsp1-back'),function(){vgos(0);});
+  onTap(document.getElementById('btn-sb-chercher'),function(){chercherBenv();});
+  onTap(document.getElementById('btn-vs3next'),function(){vs3next();});
+  onTap(document.getElementById('btn-vsp2-back'),function(){vgos(1);});
+  onTap(document.getElementById('btn-valveh'),function(){validerVeh();});
+  onTap(document.getElementById('btn-vsp3-back'),function(){vgos(2);});
+  ['Tef','Ced','Chris','Lorianne'].forEach(function(n){
+    onTap(document.getElementById('resp-'+n),function(){selectResp(n);});
+  });
+  // Matériel
+  onTap(document.getElementById('btn-mb-chercher'),function(){chercherMBenv();});
+  onTap(document.getElementById('mdest-non'),function(){setDest('Non');});
+  onTap(document.getElementById('mdest-oui'),function(){setDest('Oui');});
+  ['Tef','Ced','Chris','Lorianne'].forEach(function(n){
+    onTap(document.getElementById('mresp-'+n),function(){selectMResp(n);});
+  });
+  onTap(document.getElementById('btn-valmat'),function(){validerMat();});
+  // Enter sur les champs
+  document.getElementById('veh-num').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherVeh();}});
+  document.getElementById('sb').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherBenv();}});
+  document.getElementById('mb-search').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherMBenv();}});
+}
+
+function loadAll(){
+  var lv=false,lp=false;
+  function check(){if(!lv||!lp)return;updHomeCounts();}
+  apiGet('action=getVehicules',function(d){V=Array.isArray(d)?d:[];lv=true;check();});
+  apiGet('action=getBenevoles',function(d){B=Array.isArray(d)?d:[];});
+  apiGet('action=getPrets',function(d){P=Array.isArray(d)?d:[];lp=true;check();renVehList();});
+  apiGet('action=getPretsMateriel',function(d){PM=Array.isArray(d)?d:[];updHomeCounts();renMatList();});
+}
+function loadMat(){
+  apiGet('action=getPretsMateriel',function(d){PM=Array.isArray(d)?d:[];updHomeCounts();renMatList();});
+}
+
+// Navigation
+function showPage(id){
+  PAGES.forEach(function(p){var el=document.getElementById(p);if(el)el.className='pg'+(p===id?' on':'');});
+  window.scrollTo(0,0);
+  updateHeader(id);
+}
+function updateHeader(id){
+  var back=document.getElementById('back-btn'),title=document.getElementById('hdr-title'),ico=document.getElementById('hdr-ico');
+  if(id==='pg-home'){back.className='back-btn';title.textContent='Prêts Festival';ico.style.display='flex';}
+  else{
+    back.className='back-btn show';ico.style.display='none';
+    var titles={'pg-menu':curType==='veh'?'Véhicules':'Matériel','pg-veh-list':'Prêts véhicules','pg-veh-new':'Nouveau prêt véhicule','pg-mat-list':'Prêts matériel','pg-mat-new':'Nouveau prêt matériel'};
+    title.textContent=titles[id]||'';
+  }
+}
+function goBack(){
+  if(navStack.length>1){navStack.pop();var prev=navStack[navStack.length-1];if(prev==='pg-veh-new')vgos(0);showPage(prev);}
+  else{navStack=['pg-home'];showPage('pg-home');}
+}
+function goTo(id){navStack.push(id);showPage(id);}
+function goType(type){
+  curType=type;
+  var enc=0;
+  if(type==='veh'){for(var i=0;i<P.length;i++)if(String(P[i].Statut||'').trim()==='En cours')enc++;
+    document.getElementById('menu-list-desc').textContent='Voir et terminer les prêts véhicules';
+    document.getElementById('menu-new-desc').textContent='Enregistrer un nouveau prêt véhicule';}
+  else{for(var i=0;i<PM.length;i++)if(String(PM[i].CheckRetour||'').trim()==='Non')enc++;
+    document.getElementById('menu-list-desc').textContent='Voir et terminer les prêts matériel';
+    document.getElementById('menu-new-desc').textContent='Enregistrer un nouveau prêt matériel';}
+  document.getElementById('menu-cnt').textContent=enc;
+  document.getElementById('menu-cnt').className='tile-count'+(enc>0?' warn':' ok');
+  goTo('pg-menu');
+}
+function goAction(action){
+  if(action==='list'){if(curType==='veh'){renVehList();goTo('pg-veh-list');}else{renMatList();goTo('pg-mat-list');}}
+  else{if(curType==='veh'){rstVehForm();goTo('pg-veh-new');}else{rstMatForm();goTo('pg-mat-new');}}
+}
+function updHomeCounts(){
+  var ev=0,em=0;
+  for(var i=0;i<P.length;i++)if(String(P[i].Statut||'').trim()==='En cours')ev++;
+  for(var i=0;i<PM.length;i++)if(String(PM[i].CheckRetour||'').trim()==='Non')em++;
+  var cv=document.getElementById('cnt-veh'),cm=document.getElementById('cnt-mat');
+  cv.textContent=ev;cv.className='tile-count'+(ev>0?' warn':' ok');
+  cm.textContent=em;cm.className='tile-count'+(em>0?' warn':' ok');
+}
+
+// Dispo locale
+function dispo(v){
+  var vid=String(v.VehiculeID||'').trim(),plaque=String(v.Plaque||'').trim(),lnde=String(v['NuméroLNDE']||v.NumeroLNDE||'').trim();
+  for(var i=0;i<P.length;i++){
+    if(String(P[i].Statut||'').trim()!=='En cours')continue;
+    var pvid=String(P[i].VehiculeID||'').trim(),ppl=String(P[i].Plaque||'').trim(),plnd=String(P[i].NumeroLNDE||'').trim();
+    if(vid&&pvid&&vid===pvid)return false;
+    if(plaque&&ppl&&plaque===ppl)return false;
+    if(lnde&&plnd&&lnde===plnd)return false;
+  }
+  return true;
+}
+
+// Chercher véhicule par numéro
+function chercherVeh(){
+  var num=String(document.getElementById('veh-num').value).trim();
+  if(!num){toast('Saisissez un numéro','err');return;}
+  var n=parseInt(num);
+  if(isNaN(n)||n<1||n>68){toast('Numéro entre 1 et 68','err');return;}
+  var found=null;
+  for(var i=0;i<V.length;i++){
+    var lnde=String(V[i]['NuméroLNDE']||V[i].NumeroLNDE||'').trim();
+    if(parseInt(lnde)===n){found=V[i];break;}
+  }
+  if(!found){toast('Véhicule '+n+' introuvable','err');return;}
+  var d=dispo(found);
+  var lnde=found['NuméroLNDE']||found.NumeroLNDE||'';
+  var box=document.getElementById('v-info');
+  box.style.display='block';
+  if(!d){
+    box.innerHTML='<span style="color:var(--err);font-weight:700;">⚠ Véhicule '+lnde+' indisponible</span><br>'+(found.Type||'')+(found.Plaque?' · '+found.Plaque:'');
+    document.getElementById('v-confirm').style.display='none';
+    selV=null;
+  } else {
+    box.innerHTML='<strong>Véhicule '+lnde+'</strong>'+(found.Type?' — '+found.Type:'')+(found.Plaque?' &nbsp;·&nbsp; '+found.Plaque:'')+(found.Carburant?' &nbsp;·&nbsp; '+found.Carburant:'');
+    document.getElementById('v-confirm').style.display='block';
+    selV=found;
+  }
+}
+function rechangerVeh(){
+  selV=null;
+  document.getElementById('veh-num').value='';
+  document.getElementById('v-info').style.display='none';
+  document.getElementById('v-confirm').style.display='none';
+}
+function vs1next(){if(!selV){toast('Sélectionnez un véhicule','err');return;}vgos(1);}
+
+// Steps véhicule
+function vgos(n){
+  for(var i=0;i<4;i++){
+    document.getElementById('vsp'+i).className='sp'+(i===n?' on':'');
+    document.getElementById('vsi'+i).className='stp'+(i===n?' on':i<n?' dn':'');
+  }
+  if(n===1&&selV){var lnde=selV['NuméroLNDE']||selV.NumeroLNDE||'';document.getElementById('v-recap').innerHTML='<strong>'+(lnde||selV.Plaque)+'</strong>'+(selV.Type?' — '+selV.Type:'');}
+  if(n===3)buildRecap();
+  window.scrollTo(0,0);
+}
+
+function chkDispo(){
+  var dd=document.getElementById('dd').value,hd=document.getElementById('hd').value;
+  var dr=document.getElementById('dr').value,hr=document.getElementById('hr').value;
+  if(!dd||!hd||!dr||!hr){showDM('Remplissez toutes les dates.',false);return;}
+  if(new Date(dd+'T'+hd)>=new Date(dr+'T'+hr)){showDM('Le retour doit être après le départ.',false);return;}
+  apiGet('action=verifierDisponibilite&vehiculeId='+encodeURIComponent(selV.VehiculeID||selV.Plaque)+'&dateDepart='+dd+'&heureDepart='+hd+'&dateRetour='+dr+'&heureRetour='+hr,
+    function(r){
+      if(r.disponible){showDM('✔ Véhicule disponible !',true);document.getElementById('btn-dispo-next').style.display='block';}
+      else showDM('✗ Indisponible : '+r.message,false);
+    });
+}
+function showDM(msg,ok){
+  var e=document.getElementById('dm');e.style.display='block';
+  e.style.background=ok?'var(--ok-b)':'var(--err-b)';e.style.color=ok?'var(--ok)':'var(--err)';
+  e.style.border='2px solid '+(ok?'#A5DEC0':'#F5B4B0');e.textContent=msg;
+}
+
+// Bénévoles véhicule — recherche à la demande
+function chercherBenv(){
+  var f=document.getElementById('sb').value.trim();
+  if(f.length<2){toast('Tapez au moins 2 lettres','err');return;}
+  renBenv(f);
+  document.getElementById('bl').style.display='flex';
+}
+function renBenv(f){
+  var c=document.getElementById('bl');if(!c)return;
+  var items=[];
+  if(f){var fl=f.toLowerCase();for(var i=0;i<B.length;i++){var b=B[i],pr=b['Prénom']||b.Prenom||'';if((b.Nom||'').toLowerCase().indexOf(fl)>-1||pr.toLowerCase().indexOf(fl)>-1||(b.Commission||'').toLowerCase().indexOf(fl)>-1)items.push({b:b,i:i});}}
+  if(!items.length){c.innerHTML="<div class='emp'>Aucun résultat</div>";return;}
+  c.innerHTML='';
+  for(var j=0;j<items.length;j++){
+    var b=items[j].b,ri=items[j].i,pr=b['Prénom']||b.Prenom||'',ini=(pr.charAt(0)+(b.Nom||'').charAt(0)).toUpperCase(),sel=selB!==null&&B.indexOf(selB)===ri;
+    var el=document.createElement('div');
+    el.className='bi'+(sel?' on':'');
+    el.innerHTML='<div class="bav">'+ini+'</div><div><div class="bi-name">'+pr+' '+(b.Nom||'')+'</div><div class="bi-comm">'+(b.Commission||'')+'</div></div>'+(sel?'<svg width="24" height="24" viewBox="0 0 24 24" fill="var(--acc)" style="margin-left:auto"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>':'');
+    (function(idx){onTap(el,function(){selBenv(idx);});})(ri);
+    c.appendChild(el);
+  }
+}
+function selBenv(i){selB=B[i];renBenv(document.getElementById('sb').value);}
+function vs3next(){if(!selB){toast('Sélectionnez un bénévole','err');return;}vgos(3);}
+
+// Responsable véhicule
+function selectResp(nom){
+  selResp=nom;
+  ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('resp-'+n).className='resp-btn'+(n===nom?' on':'');});
+  var info=document.getElementById('resp-info');info.style.display='block';info.textContent=nom+' engage sa responsabilité pour ce prêt.';
+}
+
+function fmtD(d){if(!d)return'—';var p=String(d).split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d;}
+
+function buildRecap(){
+  var pr=selB['Prénom']||selB.Prenom||'',lnde=selV['NuméroLNDE']||selV.NumeroLNDE||selV.Plaque||'';
+  document.getElementById('v-recap-final').innerHTML='<strong>Véhicule :</strong> '+lnde+(selV.Type?' — '+selV.Type:'')+'<br><strong>Plaque :</strong> '+(selV.Plaque||'—')+'<br><strong>Bénévole :</strong> '+pr+' '+(selB.Nom||'')+'<br><strong>Départ :</strong> '+fmtD(document.getElementById('dd').value)+' à '+document.getElementById('hd').value+'<br><strong>Retour prévu :</strong> '+fmtD(document.getElementById('dr').value)+' à '+document.getElementById('hr').value;
+}
+
+function validerVeh(){
+  if(!selResp){toast('Choisissez le responsable du prêt','err');return;}
+  var btn=document.getElementById('btn-valveh');btn.textContent='Enregistrement...';
+  var pr=selB['Prénom']||selB.Prenom||'',lnde=selV['NuméroLNDE']||selV.NumeroLNDE||'';
+  apiPost('creerPret',{VehiculeID:selV.VehiculeID||'',Plaque:selV.Plaque||'',NumeroLNDE:lnde,TypeVehicule:selV.Type||'',IDKEY:selB.IDKEY||'',NomPrenom:pr+' '+(selB.Nom||''),DateDepart:document.getElementById('dd').value,HeureDepart:document.getElementById('hd').value,DateRetour:document.getElementById('dr').value,HeureRetour:document.getElementById('hr').value,Signature:'Responsable: '+selResp},
+    function(r){btn.textContent='✔ Valider le prêt';if(r.error)toast(r.error,'err');else{toast('Prêt enregistré !','ok');loadAll();navStack=['pg-home'];showPage('pg-home');}},
+    function(e){toast('Erreur : '+e.message,'err');btn.textContent='✔ Valider le prêt';});
+}
+
+function rstVehForm(){
+  selV=null;selB=null;selResp=null;vgos(0);
+  document.getElementById('veh-num').value='';
+  document.getElementById('v-info').style.display='none';
+  document.getElementById('v-confirm').style.display='none';
+  document.getElementById('dm').style.display='none';
+  document.getElementById('btn-dispo-next').style.display='none';
+  document.getElementById('sb').value='';
+  var bl=document.getElementById('bl');bl.innerHTML='';bl.style.display='none';
+  document.getElementById('resp-info').style.display='none';
+  ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('resp-'+n).className='resp-btn';});
+  initDates();
+}
+
+// Listes — en cours uniquement
+function renVehList(){
+  var c=document.getElementById('veh-list-content');if(!c)return;
+  var list=[];
+  for(var i=P.length-1;i>=0;i--){if(String(P[i].Statut||'').trim()==='En cours')list.push(P[i]);}
+  if(!list.length){c.innerHTML="<div class='emp'>Aucun prêt en cours</div>";return;}
+  var h='';
+  for(var i=0;i<list.length;i++){
+    var p=list[i];
+    h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><div><div class="pc-veh">'+(p.NumeroLNDE||p.Plaque||'—')+'</div><div class="pc-sub">'+(p.TypeVehicule||'')+(p.TypeVehicule&&p.NomPrenom?' — ':''  )+(p.NomPrenom||'')+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
+      +'<div class="pc-info">Départ : '+fmtD(p.DateDepart)+' '+p.HeureDepart+'<br>Retour : '+fmtD(p.DateRetour)+' '+p.HeureRetour+'</div>'
+      +'<div class="pc-foot"><button class="btn bo" onclick="tPret(this)" data-id="'+p.ID+'">✔ Terminer</button><button class="btn bd" onclick="dPret(this)" data-id="'+p.ID+'">Supprimer</button></div></div>';
+  }
+  c.innerHTML=h;
+  c.querySelectorAll('.btn').forEach(function(btn){onTap(btn,function(e){btn.onclick&&btn.onclick(e);});});
+}
+
+function renMatList(){
+  var c=document.getElementById('mat-list-content');if(!c)return;
+  var list=[];
+  for(var i=PM.length-1;i>=0;i--){if(String(PM[i].CheckRetour||'').trim()==='Non')list.push(PM[i]);}
+  if(!list.length){c.innerHTML="<div class='emp'>Aucun prêt en cours</div>";return;}
+  var h='';
+  for(var i=0;i<list.length;i++){
+    var p=list[i];
+    h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><div><div class="pc-veh">'+p.Designation+'</div><div class="pc-sub">'+p.Benevole+' &nbsp;·&nbsp; Qté : '+p.Quantite+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
+      +'<div class="pc-info">Départ : '+fmtD(p.DateDepart)+(p.InfoComplementaire?'<br>Info : '+p.InfoComplementaire:'')+'<br>Déstockage : <strong>'+p.Destockage+'</strong>'+(p.Signature?'<br>Saisie : '+p.Signature:'')+'</div>'
+      +'<div class="pc-foot"><button class="btn bo" onclick="retourMat(this)" data-id="'+p.IDkey+'">✔ Retour</button><button class="btn bd" onclick="suppMat(this)" data-id="'+p.IDkey+'">Supprimer</button></div></div>';
+  }
+  c.innerHTML=h;
+  c.querySelectorAll('.btn').forEach(function(btn){onTap(btn,function(e){btn.onclick&&btn.onclick(e);});});
+}
+
+// Matériel — bénévole recherche à la demande
+function chercherMBenv(){
+  var f=document.getElementById('mb-search').value.trim();
+  if(f.length<2){toast('Tapez au moins 2 lettres','err');return;}
+  filterMBenv(f);
+  document.getElementById('mb-list').style.display='flex';
+}
+function filterMBenv(f){
+  var box=document.getElementById('mb-list');if(!box)return;
+  var items=[];
+  if(f){var fl=f.toLowerCase();for(var i=0;i<B.length;i++){var b=B[i],pr=b['Prénom']||b.Prenom||'';if((b.Nom||'').toLowerCase().indexOf(fl)>-1||pr.toLowerCase().indexOf(fl)>-1||(b.Commission||'').toLowerCase().indexOf(fl)>-1)items.push(b);}}
+  if(!items.length){box.innerHTML="<div class='emp'>Aucun résultat</div>";return;}
+  box.innerHTML='';
+  for(var i=0;i<items.length;i++){
+    var b=items[i],ri=B.indexOf(b),pr=b['Prénom']||b.Prenom||'',ini=(pr.charAt(0)+(b.Nom||'').charAt(0)).toUpperCase(),sel=selMBenv&&B.indexOf(selMBenv)===ri;
+    var el=document.createElement('div');
+    el.className='bi'+(sel?' on':'');
+    el.innerHTML='<div class="bav">'+ini+'</div><div><div class="bi-name">'+pr+' '+(b.Nom||'')+'</div><div class="bi-comm">'+(b.Commission||'')+'</div></div>';
+    (function(idx){onTap(el,function(){pickMBenv(idx);});})(ri);
+    box.appendChild(el);
+  }
+}
+function pickMBenv(idx){
+  selMBenv=B[idx];
+  filterMBenv(document.getElementById('mb-search').value);
+  var pr=selMBenv['Prénom']||selMBenv.Prenom||'';
+  var info=document.getElementById('mb-info');info.style.display='block';
+  info.innerHTML='<strong>'+pr+' '+selMBenv.Nom+'</strong>'+(selMBenv.Commission?' &nbsp;·&nbsp; '+selMBenv.Commission:'');
+}
+function setDest(val){
+  selDest=val;
+  document.getElementById('mdest-oui').className='dest-btn'+(val==='Oui'?' on-oui':'');
+  document.getElementById('mdest-non').className='dest-btn'+(val==='Non'?' on-non':'');
+}
+function selectMResp(nom){
+  selMResp=nom;
+  ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('mresp-'+n).className='resp-btn'+(n===nom?' on':'');});
+  var info=document.getElementById('mresp-info');info.style.display='block';info.textContent=nom+' prend en charge ce prêt.';
+}
+function validerMat(){
+  if(!selMBenv){toast('Sélectionnez un bénévole','err');return;}
+  var desig=document.getElementById('mdesig').value.trim();
+  if(!desig){toast('Saisissez une désignation','err');return;}
+  if(!selMResp){toast('Choisissez le responsable de saisie','err');return;}
+  var btn=document.getElementById('btn-valmat');btn.textContent='Enregistrement...';
+  var pr=selMBenv['Prénom']||selMBenv.Prenom||'';
+  apiPost('creerPretMateriel',{Benevole:pr+' '+selMBenv.Nom,IDKEY:selMBenv.IDKEY||'',Designation:desig,InfoComplementaire:document.getElementById('minfo').value||'',Quantite:String(parseInt(document.getElementById('mqte').value)||1),Destockage:selDest,Signature:'Saisie par '+selMResp},
+    function(r){btn.textContent='✔ Enregistrer le prêt';if(r.error)toast(r.error,'err');else{toast('Prêt matériel enregistré !','ok');loadMat();navStack=['pg-home'];showPage('pg-home');}},
+    function(e){toast('Erreur : '+e.message,'err');btn.textContent='✔ Enregistrer le prêt';});
+}
+function rstMatForm(){
+  selMBenv=null;selMResp=null;selDest='Non';
+  document.getElementById('mb-search').value='';
+  document.getElementById('mb-info').style.display='none';
+  var mbl=document.getElementById('mb-list');mbl.innerHTML='';mbl.style.display='none';
+  document.getElementById('mdesig').value='';
+  document.getElementById('minfo').value='';
+  document.getElementById('mqte').value=1;
+  document.getElementById('mresp-info').style.display='none';
+  setDest('Non');
+  ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('mresp-'+n).className='resp-btn';});
+}
+
+// Actions prêts
+function tPret(btn){var id=btn.getAttribute('data-id');oMod('Terminer le prêt','Confirmer le retour du véhicule ?','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm" data-id="'+id+'">✔ Confirmer</button>');bindModButtons(function(){apiPost('terminerPret',{pretId:id},function(r){if(r.error)toast(r.error,'err');else{toast('Terminé !','ok');loadAll();renVehList();}});});}
+function dPret(btn){var id=btn.getAttribute('data-id');oMod('Supprimer','Action irréversible. Confirmer ?','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bd" id="mod-confirm" data-id="'+id+'">Supprimer</button>');bindModButtons(function(){apiPost('supprimerPret',{pretId:id},function(r){if(r.error)toast(r.error,'err');else{toast('Supprimé','ok');loadAll();renVehList();}});});}
+function retourMat(btn){var id=btn.getAttribute('data-id');oMod('Retour matériel','Confirmer le retour du matériel ?','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm" data-id="'+id+'">✔ Confirmer</button>');bindModButtons(function(){apiPost('terminerPretMateriel',{id:id},function(r){if(r.error)toast(r.error,'err');else{toast('Retour enregistré !','ok');loadMat();renMatList();}});});}
+function suppMat(btn){var id=btn.getAttribute('data-id');oMod('Supprimer','Action irréversible.','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bd" id="mod-confirm" data-id="'+id+'">Supprimer</button>');bindModButtons(function(){apiPost('supprimerPretMateriel',{id:id},function(r){if(r.error)toast(r.error,'err');else{toast('Supprimé','ok');loadMat();renMatList();}});});}
+
+function bindModButtons(confirmFn){
+  setTimeout(function(){
+    var cancel=document.getElementById('mod-cancel'),confirm=document.getElementById('mod-confirm');
+    if(cancel)onTap(cancel,function(){cMod();});
+    if(confirm)onTap(confirm,function(){cMod();confirmFn();});
+  },50);
+}
+
+function oMod(t,b,f){document.getElementById('m-title').textContent=t;document.getElementById('m-body').innerHTML=b;document.getElementById('m-foot').innerHTML=f;document.getElementById('modal').className='mo';}
+function cMod(){document.getElementById('modal').className='mo hid';}
+function toast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast on'+(type?' '+type:'');setTimeout(function(){t.className='toast';},3000);}
+</script>
 </body>
 </html>
