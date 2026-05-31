@@ -495,7 +495,7 @@ function showDM(msg,ok){
 
 function chercherBenv(){
   var f=document.getElementById('sb').value.trim();
-  if(f.length<2){toast('Tapez au moins 2 lettres','err');return;}
+  if(f.length<5){toast('Tapez au moins 5 lettres','err');return;}
   renBenv(f);document.getElementById('bl').style.display='flex';
 }
 function renBenv(f){
@@ -526,14 +526,16 @@ function vs3next(){if(!selB){toast('Sélectionnez un bénévole','err');return;}
 function selectResp(nom){
   selResp=nom;
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('resp-'+n).className='resp-btn'+(n===nom?' on':'');});
-  var info=document.getElementById('resp-info');info.style.display='block';info.textContent=nom+' engage sa responsabilité pour ce prêt.';
+  document.getElementById('resp-info').style.display='none';
+  // Mettre à jour le récap si déjà affiché
+  if(selV&&selB) buildRecap();
 }
 
 function fmtD(d){if(!d)return'—';var p=String(d).split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d;}
 
 function buildRecap(){
   var pr=selB['Prénom']||selB.Prenom||'',lnde=selV['NuméroLNDE']||selV.NumeroLNDE||selV.Plaque||'';
-  document.getElementById('v-recap-final').innerHTML='<strong>Véhicule :</strong> '+lnde+(selV.Type?' — '+selV.Type:'')+'<br><strong>Plaque :</strong> '+(selV.Plaque||'—')+'<br><strong>Bénévole :</strong> '+pr+' '+(selB.Nom||'')+'<br><strong>Départ :</strong> '+fmtD(document.getElementById('dd').value)+' à '+document.getElementById('hd').value+'<br><strong>Retour prévu :</strong> '+fmtD(document.getElementById('dr').value)+' à '+document.getElementById('hr').value;
+  document.getElementById('v-recap-final').innerHTML='<strong>Véhicule :</strong> '+lnde+(selV.Type?' — '+selV.Type:'')+'<br><strong>Plaque :</strong> '+(selV.Plaque||'—')+'<br><strong>Bénévole :</strong> '+pr+' '+(selB.Nom||'')+'<br><strong>Départ :</strong> '+fmtD(document.getElementById('dd').value)+' à '+document.getElementById('hd').value+'<br><strong>Retour prévu :</strong> '+fmtD(document.getElementById('dr').value)+' à '+document.getElementById('hr').value+(selResp?'<br><strong>Responsable :</strong> '+selResp:'');
 }
 
 function validerVeh(){
