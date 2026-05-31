@@ -315,8 +315,13 @@ button, .tile, .bi, .vpick-item, .ch, .resp-btn, .dest-btn {
 // ══════════════════════════════════════
 var GAS_DESKTOP='https://script.google.com/macros/s/AKfycbwC_6E4azD6ogRh-_hEm_xE8dl4NrcFdVkcXQL-RGiQpvy92gRztrtCOkNx-Sjxd3Fx/exec?mode=desktop';
 (function(){
+  // Ne pas rediriger si on vient déjà de GAS (évite la boucle)
+  if(window.location.search.indexOf('noredirect')>-1) return;
   var ua=navigator.userAgent.toLowerCase();
-  var isMobile=/android|iphone|ipad|ipod|mobile|tablet/.test(ua);
+  // Détection stricte mobile — exclut les PC même avec touch
+  var isMobile=/android|iphone|ipod/.test(ua) || 
+    (/ipad/.test(ua) && navigator.maxTouchPoints>1) ||
+    (window.innerWidth<=768 && /mobile/.test(ua));
   if(!isMobile){
     document.getElementById('redir-screen').className='show';
     document.querySelector('.hdr').style.display='none';
