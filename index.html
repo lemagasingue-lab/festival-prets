@@ -17,9 +17,10 @@
   --err:#C0392B;--err-b:#FDECEA;
   --r:16px;--rl:22px;
 }
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
 html,body{height:100%;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font-size:18px;overflow-x:hidden;}
+input,textarea{-webkit-user-select:text!important;user-select:text!important;-webkit-touch-callout:default!important;}
 
 /* ── TOUCH : fix réactivité tous boutons ── */
 button, .tile, .bi, .vpick-item, .ch, .resp-btn, .dest-btn {
