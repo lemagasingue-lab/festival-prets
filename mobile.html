@@ -15,97 +15,125 @@
   --ok:#1A7A4A;--ok-b:#E8F5EE;
   --warn:#8A5A00;--warn-b:#FFF4D6;
   --err:#C0392B;--err-b:#FDECEA;
-  --r:16px;--rl:22px;
+  --r:12px;--rl:16px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
 html,body{height:100%;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font-size:18px;overflow-x:hidden;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font-size:15px;overflow-x:hidden;}
 input,textarea{-webkit-user-select:text!important;user-select:text!important;-webkit-touch-callout:default!important;}
 button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-select:none;user-select:none;cursor:pointer;}
-.hdr{background:var(--surf);border-bottom:2px solid var(--bord);padding:0 20px;display:flex;align-items:center;height:68px;position:sticky;top:0;z-index:100;gap:14px;}
-.bico{width:44px;height:44px;background:var(--acc);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.bico svg{fill:white;width:24px;height:24px;}
-.htitle{font-weight:700;font-size:20px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.back-btn{display:none;align-items:center;gap:6px;padding:10px 16px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf2);font-family:inherit;font-size:17px;font-weight:600;color:var(--txt);cursor:pointer;white-space:nowrap;touch-action:manipulation;}
+
+/* HEADER */
+.hdr{background:var(--surf);border-bottom:2px solid var(--bord);padding:0 14px;display:flex;align-items:center;height:52px;position:sticky;top:0;z-index:100;gap:10px;}
+.bico{width:34px;height:34px;background:var(--acc);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bico svg{fill:white;width:18px;height:18px;}
+.htitle{font-weight:700;font-size:16px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.back-btn{display:none;align-items:center;gap:5px;padding:7px 12px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf2);font-family:inherit;font-size:14px;font-weight:600;color:var(--txt);cursor:pointer;white-space:nowrap;touch-action:manipulation;}
 .back-btn.show{display:flex;}
-.back-btn svg{width:20px;height:20px;fill:var(--txt);}
-.pg{display:none;padding:20px;min-height:calc(100vh - 68px);}
+.back-btn svg{width:16px;height:16px;fill:var(--txt);}
+
+/* PAGES */
+.pg{display:none;padding:12px 14px;min-height:calc(100vh - 52px);}
 .pg.on{display:block;}
-.tiles{display:flex;flex-direction:column;gap:16px;padding-top:8px;}
-.tile{display:flex;align-items:center;gap:20px;padding:28px 24px;background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);width:100%;font-family:inherit;text-align:left;}
+
+/* TUILES ACCUEIL */
+.tiles{display:flex;flex-direction:column;gap:10px;padding-top:6px;}
+.tile{display:flex;align-items:center;gap:14px;padding:18px 16px;background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);width:100%;font-family:inherit;text-align:left;}
 .tile:active{background:var(--acc-l);border-color:var(--acc);}
-.tile-ico{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;pointer-events:none;}
+.tile-ico{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;pointer-events:none;}
 .tile-ico.blue{background:var(--acc-l);}
 .tile-ico.green{background:var(--ok-b);}
 .tile-ico.orange{background:var(--warn-b);}
-.tile-title{font-size:22px;font-weight:700;color:var(--txt);pointer-events:none;}
-.tile-desc{font-size:15px;color:var(--txt2);margin-top:4px;pointer-events:none;}
-.tile-count{margin-left:auto;font-size:32px;font-weight:700;flex-shrink:0;pointer-events:none;}
+.tile-title{font-size:17px;font-weight:700;color:var(--txt);pointer-events:none;}
+.tile-desc{font-size:13px;color:var(--txt2);margin-top:2px;pointer-events:none;}
+.tile-count{margin-left:auto;font-size:26px;font-weight:700;flex-shrink:0;pointer-events:none;}
 .tile-count.warn{color:var(--warn);}
 .tile-count.ok{color:var(--ok);}
-.steps{display:flex;align-items:center;margin-bottom:24px;}
-.stn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;border:2px solid var(--bord);color:var(--txt2);background:var(--surf);flex-shrink:0;}
+
+/* STEPS */
+.steps{display:flex;align-items:center;margin-bottom:14px;}
+.stn{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;border:2px solid var(--bord);color:var(--txt2);background:var(--surf);flex-shrink:0;}
 .stp.on .stn{border-color:var(--acc);color:white;background:var(--acc);}
 .stp.dn .stn{border-color:var(--ok);color:white;background:var(--ok);}
-.ssep{flex:1;height:2px;background:var(--bord);margin:0 6px;}
+.ssep{flex:1;height:2px;background:var(--bord);margin:0 4px;}
 .sp{display:none;}
 .sp.on{display:block;}
-.step-title{font-size:22px;font-weight:700;margin-bottom:20px;color:var(--txt);}
-.fg{margin-bottom:18px;}
-.fl{display:block;font-size:14px;font-weight:700;color:var(--txt2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
-.fc{width:100%;padding:18px 16px;border:2px solid var(--bord);border-radius:var(--r);background:var(--surf);font-family:inherit;font-size:20px;color:var(--txt);outline:none;}
+
+/* FORMULAIRES */
+.step-title{font-size:17px;font-weight:700;margin-bottom:12px;color:var(--txt);}
+.fg{margin-bottom:10px;}
+.fl{display:block;font-size:12px;font-weight:700;color:var(--txt2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em;}
+.fc{width:100%;padding:11px 12px;border:2px solid var(--bord);border-radius:var(--r);background:var(--surf);font-family:inherit;font-size:16px;color:var(--txt);outline:none;}
 .fc:focus{border-color:var(--acc);}
-.fsec{background:var(--surf2);border-radius:var(--r);padding:18px;margin-bottom:16px;border:2px solid var(--bord);}
-.fst{font-size:14px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
-.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:20px 24px;border-radius:var(--r);border:none;font-family:inherit;font-size:20px;font-weight:600;width:100%;margin-bottom:12px;line-height:1;touch-action:manipulation;-webkit-user-select:none;user-select:none;}
+.fsec{background:var(--surf2);border-radius:var(--r);padding:12px;margin-bottom:10px;border:2px solid var(--bord);}
+.fst{font-size:12px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+
+/* BOUTONS */
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 18px;border-radius:var(--r);border:none;font-family:inherit;font-size:16px;font-weight:600;width:100%;margin-bottom:8px;line-height:1;touch-action:manipulation;-webkit-user-select:none;user-select:none;}
 .btn:last-child{margin-bottom:0;}
 .btn:active{opacity:.85;}
 .bp{background:var(--acc);color:white;}
 .bs{background:var(--surf2);color:var(--txt);border:2px solid var(--bord);}
 .bd{background:var(--err-b);color:var(--err);border:2px solid #F5B4B0;}
 .bo{background:var(--ok-b);color:var(--ok);border:2px solid #A5DEC0;}
-.btn-row{display:flex;gap:12px;margin-top:4px;}
+.btn-row{display:flex;gap:10px;margin-top:4px;}
 .btn-row .btn{margin-bottom:0;}
-.bl{display:flex;flex-direction:column;gap:10px;max-height:380px;overflow-y:auto;}
-.bi{display:flex;align-items:center;gap:16px;padding:16px;border:2px solid var(--bord);border-radius:var(--r);background:var(--surf);}
+
+/* LISTE BÉNÉVOLES */
+.bl{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto;}
+.bi{display:flex;align-items:center;gap:12px;padding:12px;border:2px solid var(--bord);border-radius:var(--r);background:var(--surf);}
 .bi.on{border-color:var(--acc);background:var(--acc-l);}
 .bi:active{background:var(--acc-l);}
-.bav{width:52px;height:52px;border-radius:50%;background:var(--acc-l);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--acc-t);flex-shrink:0;pointer-events:none;}
-.bi-name{font-size:19px;font-weight:600;pointer-events:none;}
-.bi-comm{font-size:14px;color:var(--txt2);margin-top:3px;pointer-events:none;}
-.resp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.resp-btn{padding:12px 10px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:16px;font-weight:600;color:var(--txt);text-align:center;}
+.bav{width:40px;height:40px;border-radius:50%;background:var(--acc-l);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:var(--acc-t);flex-shrink:0;pointer-events:none;}
+.bi-name{font-size:15px;font-weight:600;pointer-events:none;}
+.bi-comm{font-size:12px;color:var(--txt2);margin-top:2px;pointer-events:none;}
+
+/* RESPONSABLES */
+.resp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.resp-btn{padding:10px 8px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:15px;font-weight:600;color:var(--txt);text-align:center;}
 .resp-btn.on{background:var(--acc);color:white;border-color:var(--acc);}
 .resp-btn:active{opacity:.85;}
-.dest-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.dest-btn{padding:20px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:20px;font-weight:600;text-align:center;}
+
+/* DESTOCKAGE */
+.dest-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.dest-btn{padding:12px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:15px;font-weight:600;text-align:center;}
 .dest-btn.on-non{background:var(--acc);color:white;border-color:var(--acc);}
 .dest-btn.on-oui{background:var(--err);color:white;border-color:var(--err);}
 .dest-btn:active{opacity:.85;}
-.bdg{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:20px;font-size:15px;font-weight:600;pointer-events:none;}
+
+/* BADGES */
+.bdg{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;pointer-events:none;}
 .bok{background:var(--ok-b);color:var(--ok);}
 .berr{background:var(--err-b);color:var(--err);}
 .bwarn{background:var(--warn-b);color:var(--warn);}
-.dot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;}
-.pc{background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);padding:18px;margin-bottom:14px;}
-.pc-veh{font-weight:700;font-size:22px;margin-bottom:4px;}
-.pc-sub{font-size:16px;color:var(--txt2);margin-bottom:10px;}
-.pc-info{font-size:16px;color:var(--txt2);line-height:2;margin-bottom:14px;}
-.pc-foot{display:flex;gap:10px;flex-wrap:wrap;}
-.pc-foot .btn{width:auto;flex:1;margin-bottom:0;padding:16px 20px;font-size:17px;}
-.ibox{padding:16px 18px;background:var(--acc-l);border-radius:var(--r);border:2px solid rgba(45,91,227,.2);font-size:17px;margin-bottom:16px;line-height:1.7;}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;}
+
+/* CARTES PRÊTS */
+.pc{background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);padding:12px;margin-bottom:10px;}
+.pc-veh{font-weight:700;font-size:17px;margin-bottom:2px;}
+.pc-sub{font-size:13px;color:var(--txt2);margin-bottom:6px;}
+.pc-info{font-size:13px;color:var(--txt2);line-height:1.8;margin-bottom:10px;}
+.pc-foot{display:flex;gap:8px;flex-wrap:wrap;}
+.pc-foot .btn{width:auto;flex:1;margin-bottom:0;padding:12px 16px;font-size:15px;}
+
+/* INFO BOX */
+.ibox{padding:10px 14px;background:var(--acc-l);border-radius:var(--r);border:2px solid rgba(45,91,227,.2);font-size:14px;margin-bottom:10px;line-height:1.6;}
+
+/* MODAL */
 .mo{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:flex-end;}
 .mo.hid{display:none;}
-.md{background:var(--surf);border-radius:24px 24px 0 0;width:100%;padding:28px 24px;}
-.mt{font-size:22px;font-weight:700;margin-bottom:14px;}
-.mp{font-size:18px;color:var(--txt2);margin-bottom:4px;}
-.mf{display:flex;gap:12px;margin-top:22px;}
+.md{background:var(--surf);border-radius:20px 20px 0 0;width:100%;padding:22px 18px;}
+.mt{font-size:18px;font-weight:700;margin-bottom:10px;}
+.mp{font-size:15px;color:var(--txt2);margin-bottom:4px;}
+.mf{display:flex;gap:10px;margin-top:16px;}
 .mf .btn{margin-bottom:0;}
-.emp{text-align:center;padding:40px 20px;color:var(--txt2);font-size:17px;}
-.ld{display:inline-block;width:22px;height:22px;border:3px solid var(--bord);border-top-color:var(--acc);border-radius:50%;animation:sp .7s linear infinite;}
+
+/* DIVERS */
+.emp{text-align:center;padding:30px 20px;color:var(--txt2);font-size:15px;}
+.ld{display:inline-block;width:20px;height:20px;border:3px solid var(--bord);border-top-color:var(--acc);border-radius:50%;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg);}}
-.dm-box{display:none;padding:16px;border-radius:var(--r);margin-bottom:14px;font-size:17px;font-weight:500;}
-.toast{position:fixed;bottom:24px;left:16px;right:16px;padding:18px 22px;border-radius:var(--r);font-size:18px;font-weight:600;z-index:999;opacity:0;transform:translateY(8px);transition:all .2s;background:var(--txt);color:white;text-align:center;}
+.dm-box{display:none;padding:12px;border-radius:var(--r);margin-bottom:10px;font-size:14px;font-weight:500;}
+.toast{position:fixed;bottom:20px;left:14px;right:14px;padding:14px 18px;border-radius:var(--r);font-size:15px;font-weight:600;z-index:999;opacity:0;transform:translateY(8px);transition:all .2s;background:var(--txt);color:white;text-align:center;}
 .toast.on{opacity:1;transform:translateY(0);}
 .toast.ok{background:var(--ok);}
 .toast.err{background:var(--err);}
@@ -164,51 +192,61 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
     <div class="stp" id="vsi2"><div class="stn">3</div></div><div class="ssep"></div>
     <div class="stp" id="vsi3"><div class="stn">4</div></div>
   </div>
+
+  <!-- STEP 1 : véhicule -->
   <div class="sp on" id="vsp0">
     <div class="step-title">Numéro du véhicule</div>
     <div class="fg">
       <label class="fl">Numéro LNDE (1 à 68)</label>
-      <input type="number" class="fc" id="veh-num" min="1" max="68" placeholder="Ex: 12" autocomplete="off" style="font-size:32px;text-align:center;padding:22px;">
+      <input type="number" class="fc" id="veh-num" min="1" max="68" placeholder="Ex: 12" autocomplete="off" style="font-size:28px;text-align:center;padding:16px;">
     </div>
     <button class="btn bp" id="btn-veh-chercher">🔍 Rechercher</button>
-    <div id="v-info" style="display:none;margin-top:14px;" class="ibox"></div>
-    <div id="v-confirm" style="display:none;margin-top:8px;">
+    <div id="v-info" style="display:none;margin-top:10px;" class="ibox"></div>
+    <div id="v-confirm" style="display:none;margin-top:6px;">
       <button class="btn bp" id="btn-vs1next">✔ Confirmer ce véhicule</button>
     </div>
-    <div id="v-rechanger" style="display:none;margin-top:8px;">
+    <div id="v-rechanger" style="display:none;margin-top:6px;">
       <button class="btn bs" id="btn-veh-rechanger">↩ Changer de numéro</button>
     </div>
   </div>
+
+  <!-- STEP 2 : dates -->
   <div class="sp" id="vsp1">
     <div id="v-recap" class="ibox"></div>
     <div class="step-title">Dates du prêt</div>
-    <div class="fsec">
-      <div class="fst">Départ</div>
-      <div class="fg"><label class="fl">Date</label><input type="date" class="fc" id="dd"></div>
-      <div class="fg"><label class="fl">Heure</label><input type="time" class="fc" id="hd"></div>
-    </div>
-    <div class="fsec">
-      <div class="fst">Retour prévu</div>
-      <div class="fg"><label class="fl">Date</label><input type="date" class="fc" id="dr"></div>
-      <div class="fg"><label class="fl">Heure</label><input type="time" class="fc" id="hr"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+      <div class="fsec" style="margin-bottom:0;">
+        <div class="fst">Départ</div>
+        <div class="fg"><label class="fl">Date</label><input type="date" class="fc" id="dd"></div>
+        <div><label class="fl">Heure</label><input type="time" class="fc" id="hd"></div>
+      </div>
+      <div class="fsec" style="margin-bottom:0;">
+        <div class="fst">Retour prévu</div>
+        <div class="fg"><label class="fl">Date</label><input type="date" class="fc" id="dr"></div>
+        <div><label class="fl">Heure</label><input type="time" class="fc" id="hr"></div>
+      </div>
     </div>
     <div class="dm-box" id="dm"></div>
     <button class="btn bp" id="btn-chkdispo">Vérifier disponibilité</button>
     <button class="btn bp" id="btn-dispo-next" style="display:none">Suivant → Bénévole</button>
     <button class="btn bs" id="btn-vsp1-back">← Retour</button>
   </div>
+
+  <!-- STEP 3 : bénévole -->
   <div class="sp" id="vsp2">
     <div class="step-title">Bénévole emprunteur</div>
-    <div class="fg" style="display:flex;gap:10px;align-items:flex-end;">
-      <div style="flex:1"><label class="fl">Nom ou prénom</label><input type="text" class="fc" id="sb" placeholder="Taper au moins 5 lettres..." autocomplete="off"></div>
-      <button class="btn bp" id="btn-sb-chercher" style="width:auto;padding:18px 20px;margin-bottom:0;">🔍</button>
+    <div class="fg" style="display:flex;gap:8px;align-items:flex-end;">
+      <div style="flex:1"><label class="fl">Nom ou prénom</label><input type="text" class="fc" id="sb" placeholder="5 lettres min." autocomplete="off"></div>
+      <button class="btn bp" id="btn-sb-chercher" style="width:auto;padding:11px 16px;margin-bottom:0;">🔍</button>
     </div>
     <div class="bl" id="bl" style="display:none;"></div>
-    <div class="btn-row" style="margin-top:16px;">
+    <div class="btn-row" style="margin-top:12px;">
       <button class="btn bs" id="btn-vsp2-back">← Retour</button>
       <button class="btn bp" id="btn-vs3next">Suivant →</button>
     </div>
   </div>
+
+  <!-- STEP 4 : confirmation -->
   <div class="sp" id="vsp3">
     <div class="step-title">Confirmer le prêt</div>
     <div id="v-recap-final" class="ibox"></div>
@@ -220,7 +258,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
         <button class="resp-btn" id="resp-Chris">Chris</button>
         <button class="resp-btn" id="resp-Lorianne">Lorianne</button>
       </div>
-      <div id="resp-info" style="display:none;margin-top:12px;" class="ibox"></div>
     </div>
     <button class="btn bp" id="btn-valveh">✔ Valider le prêt</button>
     <button class="btn bs" id="btn-vsp3-back">← Retour</button>
@@ -235,23 +272,31 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
 <!-- NOUVEAU PRÊT MAT -->
 <div id="pg-mat-new" class="pg">
   <div class="step-title">Nouveau prêt matériel</div>
-  <div class="fg" id="mb-search-zone">
-    <label class="fl">Bénévole emprunteur</label>
-    <div style="display:flex;gap:10px;align-items:flex-end;">
-      <div style="flex:1"><input type="text" class="fc" id="mb-search" placeholder="Taper au moins 2 lettres..." autocomplete="off"></div>
-      <button class="btn bp" id="btn-mb-chercher" style="width:auto;padding:18px 20px;margin-bottom:0;">🔍</button>
+
+  <!-- Zone recherche bénévole -->
+  <div id="mb-search-zone">
+    <div class="fg">
+      <label class="fl">Bénévole emprunteur</label>
+      <div style="display:flex;gap:8px;align-items:flex-end;">
+        <div style="flex:1"><input type="text" class="fc" id="mb-search" placeholder="2 lettres min." autocomplete="off"></div>
+        <button class="btn bp" id="btn-mb-chercher" style="width:auto;padding:11px 16px;margin-bottom:0;">🔍</button>
+      </div>
     </div>
-    <div class="bl" id="mb-list" style="display:none;margin-top:10px;max-height:220px;overflow-y:auto;border:2px solid var(--bord);border-radius:var(--r);"></div>
+    <div class="bl" id="mb-list" style="display:none;margin-top:8px;max-height:200px;overflow-y:auto;border:2px solid var(--bord);border-radius:var(--r);"></div>
   </div>
-  <div id="mb-info" style="display:none;margin-top:10px;margin-bottom:10px;" class="ibox"></div>
+
+  <!-- Info bénévole sélectionné -->
+  <div id="mb-info" style="display:none;margin-bottom:10px;" class="ibox"></div>
+
+  <!-- Formulaire (masqué jusqu'à sélection bénévole) -->
   <div id="mb-form" style="display:none;">
     <div class="fg"><label class="fl">Désignation</label><input type="text" class="fc" id="mdesig" placeholder="Nom du matériel..." autocomplete="off"></div>
     <div class="fg"><label class="fl">Info complémentaire</label><input type="text" class="fc" id="minfo" placeholder="Optionnel..." autocomplete="off"></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;">
       <div><label class="fl">Quantité</label><input type="number" class="fc" id="mqte" value="1" min="1"></div>
       <div>
         <label class="fl">Déstockage</label>
-        <div class="dest-row" style="margin-top:8px;">
+        <div class="dest-row" style="margin-top:6px;">
           <button class="dest-btn on-non" id="mdest-non">Non</button>
           <button class="dest-btn" id="mdest-oui">Oui</button>
         </div>
@@ -265,7 +310,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
         <button class="resp-btn" id="mresp-Chris">Chris</button>
         <button class="resp-btn" id="mresp-Lorianne">Lorianne</button>
       </div>
-      <div id="mresp-info" style="display:none;margin-top:12px;" class="ibox"></div>
     </div>
     <button class="btn bp" id="btn-valmat">✔ Enregistrer le prêt</button>
   </div>
@@ -366,15 +410,9 @@ function loadAll(){
   apiGet('action=getPrets',function(d){P=Array.isArray(d)?d:[];lp=true;check();renVehList();});
   apiGet('action=getPretsMateriel',function(d){PM=Array.isArray(d)?d:[];updHomeCounts();renMatList();});
 }
-
 function loadPrets(){
-  apiGet('action=getPrets',function(d){
-    P=Array.isArray(d)?d:[];
-    updHomeCounts();
-    renVehList();
-  });
+  apiGet('action=getPrets',function(d){P=Array.isArray(d)?d:[];updHomeCounts();renVehList();});
 }
-
 function loadMat(){
   apiGet('action=getPretsMateriel',function(d){PM=Array.isArray(d)?d:[];updHomeCounts();renMatList();});
 }
@@ -437,6 +475,7 @@ function dispo(v){
 
 function chercherVeh(){
   var num=String(document.getElementById('veh-num').value).trim();
+  document.getElementById('veh-num').blur();
   if(!num){toast('Saisissez un numéro','err');return;}
   var n=parseInt(num);
   if(isNaN(n)||n<1||n>68){toast('Numéro entre 1 et 68','err');return;}
@@ -519,7 +558,7 @@ function renBenv(f){
     var b=items[j].b,ri=items[j].i,pr=b['Prénom']||b.Prenom||'',ini=(pr.charAt(0)+(b.Nom||'').charAt(0)).toUpperCase(),sel=selB!==null&&B.indexOf(selB)===ri;
     var el=document.createElement('div');
     el.className='bi'+(sel?' on':'');
-    el.innerHTML='<div class="bav">'+ini+'</div><div><div class="bi-name">'+pr+' '+(b.Nom||'')+'</div><div class="bi-comm">'+(b.Commission||'')+'</div></div>'+(sel?'<svg width="24" height="24" viewBox="0 0 24 24" fill="var(--acc)" style="margin-left:auto"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>':'');
+    el.innerHTML='<div class="bav">'+ini+'</div><div><div class="bi-name">'+pr+' '+(b.Nom||'')+'</div><div class="bi-comm">'+(b.Commission||'')+'</div></div>'+(sel?'<svg width="20" height="20" viewBox="0 0 24 24" fill="var(--acc)" style="margin-left:auto"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>':'');
     (function(idx){onTap(el,function(){selBenv(idx);});})(ri);
     c.appendChild(el);
   }
@@ -529,14 +568,24 @@ function selBenv(i){
   document.getElementById('bl').style.display='none';
   document.getElementById('sb').style.display='none';
   document.getElementById('btn-sb-chercher').style.display='none';
-  renBenv(document.getElementById('sb').value);
+  var pr=selB['Prénom']||selB.Prenom||'';
+  // Afficher le nom sélectionné dans un ibox au-dessus des boutons
+  var existing=document.getElementById('sel-benv-info');
+  if(!existing){
+    var box=document.createElement('div');
+    box.id='sel-benv-info';
+    box.className='ibox';
+    box.style.marginBottom='10px';
+    document.getElementById('vsp2').insertBefore(box,document.getElementById('bl').nextSibling);
+  }
+  document.getElementById('sel-benv-info').innerHTML='✔ <strong>'+pr+' '+selB.Nom+'</strong>'+(selB.Commission?' · '+selB.Commission:'');
+  document.getElementById('sel-benv-info').style.display='block';
 }
 function vs3next(){if(!selB){toast('Sélectionnez un bénévole','err');return;}vgos(3);}
 
 function selectResp(nom){
   selResp=nom;
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('resp-'+n).className='resp-btn'+(n===nom?' on':'');});
-  document.getElementById('resp-info').style.display='none';
   if(selV&&selB) buildRecap();
 }
 
@@ -555,7 +604,6 @@ function validerVeh(){
     function(r){btn.textContent='✔ Valider le prêt';if(r.error)toast(r.error,'err');else{toast('Prêt enregistré !','ok');loadAll();navStack=['pg-home'];showPage('pg-home');}},
     function(e){toast('Erreur : '+e.message,'err');btn.textContent='✔ Valider le prêt';});
 }
-
 function rstVehForm(){
   selV=null;selB=null;selResp=null;vgos(0);
   document.getElementById('veh-num').value='';
@@ -570,7 +618,7 @@ function rstVehForm(){
   document.getElementById('sb').style.display='';
   document.getElementById('btn-sb-chercher').style.display='';
   var bl=document.getElementById('bl');bl.innerHTML='';bl.style.display='none';
-  document.getElementById('resp-info').style.display='none';
+  var sbi=document.getElementById('sel-benv-info');if(sbi)sbi.style.display='none';
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('resp-'+n).className='resp-btn';});
   initDates();
 }
@@ -583,7 +631,7 @@ function renVehList(){
   var h='';
   for(var i=0;i<list.length;i++){
     var p=list[i];
-    h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><div><div class="pc-veh">'+(p.NumeroLNDE||p.Plaque||'—')+'</div><div class="pc-sub">'+(p.TypeVehicule||'')+(p.TypeVehicule&&p.NomPrenom?' — ':'')+(p.NomPrenom||'')+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
+    h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;"><div><div class="pc-veh">'+(p.NumeroLNDE||p.Plaque||'—')+'</div><div class="pc-sub">'+(p.TypeVehicule||'')+(p.TypeVehicule&&p.NomPrenom?' — ':'')+(p.NomPrenom||'')+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
       +'<div class="pc-info">Départ : '+fmtD(p.DateDepart)+' '+p.HeureDepart+'<br>Retour : '+fmtD(p.DateRetour)+' '+p.HeureRetour+'</div>'
       +'<div class="pc-foot"><button class="btn bo" data-id="'+p.ID+'" data-action="tpret">✔ Terminer</button></div></div>';
   }
@@ -591,8 +639,7 @@ function renVehList(){
   c.querySelectorAll('button[data-action]').forEach(function(btn){
     onTap(btn,function(){
       var id=btn.getAttribute('data-id');
-      var action=btn.getAttribute('data-action');
-      if(action==='tpret') tPret(id);
+      if(btn.getAttribute('data-action')==='tpret') tPret(id);
     });
   });
 }
@@ -605,7 +652,7 @@ function renMatList(){
   var h='';
   for(var i=0;i<list.length;i++){
     var p=list[i];
-    h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><div><div class="pc-veh">'+p.Designation+'</div><div class="pc-sub">'+p.Benevole+' &nbsp;·&nbsp; Qté : '+p.Quantite+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
+    h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;"><div><div class="pc-veh">'+p.Designation+'</div><div class="pc-sub">'+p.Benevole+' · Qté : '+p.Quantite+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
       +'<div class="pc-info">Départ : '+fmtD(p.DateDepart)+(p.InfoComplementaire?'<br>Info : '+p.InfoComplementaire:'')+'<br>Déstockage : <strong>'+p.Destockage+'</strong>'+(p.Signature?'<br>Saisie : '+p.Signature:'')+'</div>'
       +'<div class="pc-foot"><button class="btn bo" data-id="'+p.IDkey+'" data-action="retourmat">✔ Retour</button></div></div>';
   }
@@ -613,8 +660,7 @@ function renMatList(){
   c.querySelectorAll('button[data-action]').forEach(function(btn){
     onTap(btn,function(){
       var id=btn.getAttribute('data-id');
-      var action=btn.getAttribute('data-action');
-      if(action==='retourmat') retourMat(id);
+      if(btn.getAttribute('data-action')==='retourmat') retourMat(id);
     });
   });
 }
@@ -632,9 +678,9 @@ function filterMBenv(f){
   if(!items.length){box.innerHTML="<div class='emp'>Aucun résultat</div>";return;}
   box.innerHTML='';
   for(var i=0;i<items.length;i++){
-    var b=items[i],ri=B.indexOf(b),pr=b['Prénom']||b.Prenom||'',ini=(pr.charAt(0)+(b.Nom||'').charAt(0)).toUpperCase(),sel=selMBenv&&B.indexOf(selMBenv)===ri;
+    var b=items[i],ri=B.indexOf(b),pr=b['Prénom']||b.Prenom||'',ini=(pr.charAt(0)+(b.Nom||'').charAt(0)).toUpperCase();
     var el=document.createElement('div');
-    el.className='bi'+(sel?' on':'');
+    el.className='bi';
     el.innerHTML='<div class="bav">'+ini+'</div><div><div class="bi-name">'+pr+' '+(b.Nom||'')+'</div><div class="bi-comm">'+(b.Commission||'')+'</div></div>';
     (function(idx){onTap(el,function(){pickMBenv(idx);});})(ri);
     box.appendChild(el);
@@ -645,8 +691,7 @@ function pickMBenv(idx){
   var pr=selMBenv['Prénom']||selMBenv.Prenom||'';
   var info=document.getElementById('mb-info');
   info.style.display='block';
-  info.innerHTML='✔ <strong>'+pr+' '+selMBenv.Nom+'</strong>'+(selMBenv.Commission?' &nbsp;·&nbsp; '+selMBenv.Commission:'');
-  // Masquer zone recherche, afficher le formulaire
+  info.innerHTML='✔ <strong>'+pr+' '+selMBenv.Nom+'</strong>'+(selMBenv.Commission?' · '+selMBenv.Commission:'');
   document.getElementById('mb-search-zone').style.display='none';
   document.getElementById('mb-form').style.display='block';
   window.scrollTo(0,0);
@@ -659,7 +704,6 @@ function setDest(val){
 function selectMResp(nom){
   selMResp=nom;
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('mresp-'+n).className='resp-btn'+(n===nom?' on':'');});
-  document.getElementById('mresp-info').style.display='none';
 }
 function validerMat(){
   if(!selMBenv){toast('Sélectionnez un bénévole','err');return;}
@@ -680,7 +724,6 @@ function rstMatForm(){
   document.getElementById('mb-form').style.display='none';
   var mbl=document.getElementById('mb-list');mbl.innerHTML='';mbl.style.display='none';
   document.getElementById('mdesig').value='';document.getElementById('minfo').value='';document.getElementById('mqte').value=1;
-  document.getElementById('mresp-info').style.display='none';
   setDest('Non');
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('mresp-'+n).className='resp-btn';});
 }
@@ -695,7 +738,6 @@ function tPret(id){
     });
   });
 }
-
 function retourMat(id){
   oMod('Retour matériel','Confirmer le retour du matériel ?',
     '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm">✔ Confirmer</button>');
