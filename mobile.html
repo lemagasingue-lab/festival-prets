@@ -360,9 +360,6 @@ function loadAll(){
   apiGet('action=getPrets',function(d){P=Array.isArray(d)?d:[];lp=true;check();renVehList();});
   apiGet('action=getPretsMateriel',function(d){PM=Array.isArray(d)?d:[];updHomeCounts();renMatList();});
 }
-function loadPrets(){
-  apiGet('action=getPrets',function(d){P=Array.isArray(d)?d:[];updHomeCounts();renVehList();});
-}
 function loadMat(){
   apiGet('action=getPretsMateriel',function(d){PM=Array.isArray(d)?d:[];updHomeCounts();renMatList();});
 }
@@ -567,7 +564,6 @@ function rstVehForm(){
   initDates();
 }
 
-// Rendu liste véhicules — onclick inline, pas de querySelectorAll, pas d'onTap
 function renVehList(){
   var c=document.getElementById('veh-list-content');if(!c)return;
   var list=[];
@@ -589,7 +585,6 @@ function renVehList(){
   c.innerHTML=h;
 }
 
-// Rendu liste matériel — onclick inline
 function renMatList(){
   var c=document.getElementById('mat-list-content');if(!c)return;
   var list=[];
@@ -635,9 +630,8 @@ function filterMBenv(f){
 function pickMBenv(idx){
   selMBenv=B[idx];
   var pr=selMBenv['Prénom']||selMBenv.Prenom||'';
-  var info=document.getElementById('mb-info');
-  info.style.display='block';
-  info.innerHTML='✔ <strong>'+pr+' '+selMBenv.Nom+'</strong>'+(selMBenv.Commission?' · '+selMBenv.Commission:'');
+  document.getElementById('mb-info').style.display='block';
+  document.getElementById('mb-info').innerHTML='✔ <strong>'+pr+' '+selMBenv.Nom+'</strong>'+(selMBenv.Commission?' · '+selMBenv.Commission:'');
   document.getElementById('mb-search-zone').style.display='none';
   document.getElementById('mb-form').style.display='block';
   window.scrollTo(0,0);
@@ -659,7 +653,7 @@ function validerMat(){
   var btn=document.getElementById('btn-valmat');btn.textContent='Enregistrement...';
   var pr=selMBenv['Prénom']||selMBenv.Prenom||'';
   apiPost('creerPretMateriel',{Benevole:pr+' '+selMBenv.Nom,IDKEY:selMBenv.IDKEY||'',Designation:desig,InfoComplementaire:document.getElementById('minfo').value||'',Quantite:String(parseInt(document.getElementById('mqte').value)||1),Destockage:selDest,Signature:'Saisie par '+selMResp},
-    function(r){btn.textContent='✔ Enregistrer le prêt';if(r.error)toast(r.error,'err');else{toast('Prêt matériel enregistré !','ok');loadMat();navStack=['pg-home'];showPage('pg-home');}},
+    function(r){btn.textContent='✔ Enregistrer le prêt';if(r.error)toast(r.error,'err');else{toast('Prêt matériel enregistré !','ok');setTimeout(function(){window.location.reload();},800);}},
     function(e){toast('Erreur : '+e.message,'err');btn.textContent='✔ Enregistrer le prêt';});
 }
 function rstMatForm(){
@@ -680,17 +674,18 @@ function tPret(id){
   bindModButtons(function(){
     apiPost('terminerPret',{pretId:id},function(r){
       if(r.error)toast(r.error,'err');
-      else{toast('Terminé !','ok');loadPrets();}
+      else{toast('Terminé !','ok');setTimeout(function(){window.location.reload();},800);}
     });
   });
 }
+
 function retourMat(id){
   oMod('Retour matériel','Confirmer le retour du matériel ?',
     '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm">✔ Confirmer</button>');
   bindModButtons(function(){
     apiPost('terminerPretMateriel',{id:id},function(r){
       if(r.error)toast(r.error,'err');
-      else{toast('Retour enregistré !','ok');loadMat();}
+      else{toast('Retour enregistré !','ok');setTimeout(function(){window.location.reload();},800);}
     });
   });
 }
