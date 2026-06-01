@@ -575,7 +575,7 @@ function renVehList(){
     var p=list[i];
     h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><div><div class="pc-veh">'+(p.NumeroLNDE||p.Plaque||'—')+'</div><div class="pc-sub">'+(p.TypeVehicule||'')+(p.TypeVehicule&&p.NomPrenom?' — ':''  )+(p.NomPrenom||'')+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
       +'<div class="pc-info">Départ : '+fmtD(p.DateDepart)+' '+p.HeureDepart+'<br>Retour : '+fmtD(p.DateRetour)+' '+p.HeureRetour+'</div>'
-      +'<div class="pc-foot"><button class="btn bo" onclick="tPret(this)" data-id="'+p.ID+'">✔ Terminer</button><button class="btn bd" onclick="dPret(this)" data-id="'+p.ID+'">Supprimer</button></div></div>';
+      +'<div class="pc-foot"><button class="btn bo" data-id="'+p.ID+'" data-action="tpret">✔ Terminer</button></div></div>';
   }
   c.innerHTML=h;
 }
@@ -590,7 +590,7 @@ function renMatList(){
     var p=list[i];
     h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><div><div class="pc-veh">'+p.Designation+'</div><div class="pc-sub">'+p.Benevole+' &nbsp;·&nbsp; Qté : '+p.Quantite+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
       +'<div class="pc-info">Départ : '+fmtD(p.DateDepart)+(p.InfoComplementaire?'<br>Info : '+p.InfoComplementaire:'')+'<br>Déstockage : <strong>'+p.Destockage+'</strong>'+(p.Signature?'<br>Saisie : '+p.Signature:'')+'</div>'
-      +'<div class="pc-foot"><button class="btn bo" onclick="retourMat(this)" data-id="'+p.IDkey+'">✔ Retour</button><button class="btn bd" onclick="suppMat(this)" data-id="'+p.IDkey+'">Supprimer</button></div></div>';
+      +'<div class="pc-foot"><button class="btn bo" data-id="'+p.IDkey+'" data-action="retourmat">✔ Retour</button></div></div>';
   }
   c.innerHTML=h;
 }
@@ -676,17 +676,7 @@ function tPret(btn){
     });
   });
 }
-function dPret(btn){
-  var id = btn.getAttribute('data-id');
-  oMod('Supprimer','Action irréversible. Confirmer ?',
-    '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bd" id="mod-confirm" data-id="'+id+'">Supprimer</button>');
-  bindModButtons(function(){
-    apiPost('supprimerPret', {pretId:id}, function(r){
-      if(r.error) toast(r.error,'err');
-      else { toast('Supprimé','ok'); loadPrets(); }
-    });
-  });
-}
+
 function retourMat(btn){
   var id = btn.getAttribute('data-id');
   oMod('Retour matériel','Confirmer le retour du matériel ?',
@@ -698,17 +688,7 @@ function retourMat(btn){
     });
   });
 }
-function suppMat(btn){
-  var id = btn.getAttribute('data-id');
-  oMod('Supprimer','Action irréversible.',
-    '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bd" id="mod-confirm" data-id="'+id+'">Supprimer</button>');
-  bindModButtons(function(){
-    apiPost('supprimerPretMateriel', {id:id}, function(r){
-      if(r.error) toast(r.error,'err');
-      else { toast('Supprimé','ok'); loadMat(); }
-    });
-  });
-}
+
 
 function bindModButtons(confirmFn){
   setTimeout(function(){
