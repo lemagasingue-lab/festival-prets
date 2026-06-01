@@ -578,7 +578,6 @@ function renVehList(){
       +'<div class="pc-foot"><button class="btn bo" onclick="tPret(this)" data-id="'+p.ID+'">✔ Terminer</button><button class="btn bd" onclick="dPret(this)" data-id="'+p.ID+'">Supprimer</button></div></div>';
   }
   c.innerHTML=h;
-  c.querySelectorAll('.btn').forEach(function(btn){onTap(btn,function(e){btn.onclick&&btn.onclick(e);});});
 }
 
 function renMatList(){
@@ -594,7 +593,6 @@ function renMatList(){
       +'<div class="pc-foot"><button class="btn bo" onclick="retourMat(this)" data-id="'+p.IDkey+'">✔ Retour</button><button class="btn bd" onclick="suppMat(this)" data-id="'+p.IDkey+'">Supprimer</button></div></div>';
   }
   c.innerHTML=h;
-  c.querySelectorAll('.btn').forEach(function(btn){onTap(btn,function(e){btn.onclick&&btn.onclick(e);});});
 }
 
 function chercherMBenv(){
