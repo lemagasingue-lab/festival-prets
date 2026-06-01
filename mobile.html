@@ -658,11 +658,57 @@ function rstMatForm(){
   setDest('Non');
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('mresp-'+n).className='resp-btn';});
 }
-
-function tPret(btn){var id=btn.getAttribute('data-id');oMod('Terminer le prêt','Confirmer le retour du véhicule ?','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm" data-id="'+id+'">✔ Confirmer</button>');bindModButtons(function(){apiPost('terminerPret',{pretId:id},function(r){if(r.error)toast(r.error,'err');else{toast('Terminé !','ok');loadAll();renVehList();}});});}
-function dPret(btn){var id=btn.getAttribute('data-id');oMod('Supprimer','Action irréversible. Confirmer ?','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bd" id="mod-confirm" data-id="'+id+'">Supprimer</button>');bindModButtons(function(){apiPost('supprimerPret',{pretId:id},function(r){if(r.error)toast(r.error,'err');else{toast('Supprimé','ok');loadAll();renVehList();}});});}
-function retourMat(btn){var id=btn.getAttribute('data-id');oMod('Retour matériel','Confirmer le retour du matériel ?','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm" data-id="'+id+'">✔ Confirmer</button>');bindModButtons(function(){apiPost('terminerPretMateriel',{id:id},function(r){if(r.error)toast(r.error,'err');else{toast('Retour enregistré !','ok');loadMat();renMatList();}});});}
-function suppMat(btn){var id=btn.getAttribute('data-id');oMod('Supprimer','Action irréversible.','<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bd" id="mod-confirm" data-id="'+id+'">Supprimer</button>');bindModButtons(function(){apiPost('supprimerPretMateriel',{id:id},function(r){if(r.error)toast(r.error,'err');else{toast('Supprimé','ok');loadMat();renMatList();}});});}
+function loadPrets(){
+  apiGet('action=getPrets', function(d){
+    P = Array.isArray(d) ? d : [];
+    updHomeCounts();
+    renVehList();
+  });
+}
+function tPret(btn){
+  var id = btn.getAttribute('data-id');
+  oMod('Terminer le prêt','Confirmer le retour du véhicule ?',
+    '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm" data-id="'+id+'">✔ Confirmer</button>');
+  bindModButtons(function(){
+    apiPost('terminerPret', {pretId:id}, function(r){
+      if(r.error) toast(r.error,'err');
+      else { toast('Terminé !','ok'); loadPrets(); }
+    });
+  });
+}
+function dPret(btn){
+  var id = btn.getAttribute('data-id');
+  oMod('Supprimer','Action irréversible. Confirmer ?',
+    '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bd" id="mod-confirm" data-id="'+id+'">Supprimer</button>');
+  bindModButtons(function(){
+    apiPost('supprimerPret', {pretId:id}, function(r){
+      if(r.error) toast(r.error,'err');
+      else { toast('Supprimé','ok'); loadPrets(); }
+    });
+  });
+}
+function retourMat(btn){
+  var id = btn.getAttribute('data-id');
+  oMod('Retour matériel','Confirmer le retour du matériel ?',
+    '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm" data-id="'+id+'">✔ Confirmer</button>');
+  bindModButtons(function(){
+    apiPost('terminerPretMateriel', {id:id}, function(r){
+      if(r.error) toast(r.error,'err');
+      else { toast('Retour enregistré !','ok'); loadMat(); }
+    });
+  });
+}
+function suppMat(btn){
+  var id = btn.getAttribute('data-id');
+  oMod('Supprimer','Action irréversible.',
+    '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bd" id="mod-confirm" data-id="'+id+'">Supprimer</button>');
+  bindModButtons(function(){
+    apiPost('supprimerPretMateriel', {id:id}, function(r){
+      if(r.error) toast(r.error,'err');
+      else { toast('Supprimé','ok'); loadMat(); }
+    });
+  });
+}
 
 function bindModButtons(confirmFn){
   setTimeout(function(){
