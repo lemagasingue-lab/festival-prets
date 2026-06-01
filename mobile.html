@@ -637,11 +637,13 @@ function pickMBenv(idx){
   window.scrollTo(0,0);
 }
 function setDest(val){
+  if(document.activeElement) document.activeElement.blur();
   selDest=val;
   document.getElementById('mdest-oui').className='dest-btn'+(val==='Oui'?' on-oui':'');
   document.getElementById('mdest-non').className='dest-btn'+(val==='Non'?' on-non':'');
 }
 function selectMResp(nom){
+  if(document.activeElement) document.activeElement.blur();
   selMResp=nom;
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('mresp-'+n).className='resp-btn'+(n===nom?' on':'');});
 }
