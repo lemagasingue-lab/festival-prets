@@ -573,11 +573,18 @@ function renVehList(){
   var h='';
   for(var i=0;i<list.length;i++){
     var p=list[i];
-    h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><div><div class="pc-veh">'+(p.NumeroLNDE||p.Plaque||'—')+'</div><div class="pc-sub">'+(p.TypeVehicule||'')+(p.TypeVehicule&&p.NomPrenom?' — ':''  )+(p.NomPrenom||'')+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
+    h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><div><div class="pc-veh">'+(p.NumeroLNDE||p.Plaque||'—')+'</div><div class="pc-sub">'+(p.TypeVehicule||'')+(p.TypeVehicule&&p.NomPrenom?' — ':'')+(p.NomPrenom||'')+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
       +'<div class="pc-info">Départ : '+fmtD(p.DateDepart)+' '+p.HeureDepart+'<br>Retour : '+fmtD(p.DateRetour)+' '+p.HeureRetour+'</div>'
       +'<div class="pc-foot"><button class="btn bo" data-id="'+p.ID+'" data-action="tpret">✔ Terminer</button></div></div>';
   }
   c.innerHTML=h;
+  c.querySelectorAll('button[data-action]').forEach(function(btn){
+    onTap(btn,function(){
+      var id=btn.getAttribute('data-id');
+      var action=btn.getAttribute('data-action');
+      if(action==='tpret') tPret(id);
+    });
+  });
 }
 
 function renMatList(){
