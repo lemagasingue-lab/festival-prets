@@ -350,6 +350,13 @@ function bindAll(){
   document.getElementById('veh-num').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherVeh();}});
   document.getElementById('sb').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherBenv();}});
   document.getElementById('mb-search').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherMBenv();}});
+  // Fermer le clavier au touchstart sur les boutons destockage et responsables
+  ['mdest-non','mdest-oui','mresp-Tef','mresp-Ced','mresp-Chris','mresp-Lorianne'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.addEventListener('touchstart',function(){
+      if(document.activeElement)document.activeElement.blur();
+    },{passive:true});
+  });
 }
 
 function loadAll(){
