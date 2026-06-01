@@ -22,8 +22,6 @@ html,body{height:100%;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font-size:15px;overflow-x:hidden;}
 input,textarea{-webkit-user-select:text!important;user-select:text!important;-webkit-touch-callout:default!important;}
 button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-select:none;user-select:none;cursor:pointer;}
-
-/* HEADER */
 .hdr{background:var(--surf);border-bottom:2px solid var(--bord);padding:0 14px;display:flex;align-items:center;height:52px;position:sticky;top:0;z-index:100;gap:10px;}
 .bico{width:34px;height:34px;background:var(--acc);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .bico svg{fill:white;width:18px;height:18px;}
@@ -31,12 +29,8 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
 .back-btn{display:none;align-items:center;gap:5px;padding:7px 12px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf2);font-family:inherit;font-size:14px;font-weight:600;color:var(--txt);cursor:pointer;white-space:nowrap;touch-action:manipulation;}
 .back-btn.show{display:flex;}
 .back-btn svg{width:16px;height:16px;fill:var(--txt);}
-
-/* PAGES */
 .pg{display:none;padding:12px 14px;min-height:calc(100vh - 52px);}
 .pg.on{display:block;}
-
-/* TUILES ACCUEIL */
 .tiles{display:flex;flex-direction:column;gap:10px;padding-top:6px;}
 .tile{display:flex;align-items:center;gap:14px;padding:18px 16px;background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);width:100%;font-family:inherit;text-align:left;}
 .tile:active{background:var(--acc-l);border-color:var(--acc);}
@@ -49,8 +43,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
 .tile-count{margin-left:auto;font-size:26px;font-weight:700;flex-shrink:0;pointer-events:none;}
 .tile-count.warn{color:var(--warn);}
 .tile-count.ok{color:var(--ok);}
-
-/* STEPS */
 .steps{display:flex;align-items:center;margin-bottom:14px;}
 .stn{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;border:2px solid var(--bord);color:var(--txt2);background:var(--surf);flex-shrink:0;}
 .stp.on .stn{border-color:var(--acc);color:white;background:var(--acc);}
@@ -58,8 +50,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
 .ssep{flex:1;height:2px;background:var(--bord);margin:0 4px;}
 .sp{display:none;}
 .sp.on{display:block;}
-
-/* FORMULAIRES */
 .step-title{font-size:17px;font-weight:700;margin-bottom:12px;color:var(--txt);}
 .fg{margin-bottom:10px;}
 .fl{display:block;font-size:12px;font-weight:700;color:var(--txt2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em;}
@@ -67,9 +57,7 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
 .fc:focus{border-color:var(--acc);}
 .fsec{background:var(--surf2);border-radius:var(--r);padding:12px;margin-bottom:10px;border:2px solid var(--bord);}
 .fst{font-size:12px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
-
-/* BOUTONS */
-.btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 18px;border-radius:var(--r);border:none;font-family:inherit;font-size:16px;font-weight:600;width:100%;margin-bottom:8px;line-height:1;touch-action:manipulation;-webkit-user-select:none;user-select:none;}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 18px;border-radius:var(--r);border:none;font-family:inherit;font-size:16px;font-weight:600;width:100%;margin-bottom:8px;line-height:1;touch-action:manipulation;-webkit-user-select:none;user-select:none;cursor:pointer;}
 .btn:last-child{margin-bottom:0;}
 .btn:active{opacity:.85;}
 .bp{background:var(--acc);color:white;}
@@ -78,8 +66,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
 .bo{background:var(--ok-b);color:var(--ok);border:2px solid #A5DEC0;}
 .btn-row{display:flex;gap:10px;margin-top:4px;}
 .btn-row .btn{margin-bottom:0;}
-
-/* LISTE BÉNÉVOLES */
 .bl{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto;}
 .bi{display:flex;align-items:center;gap:12px;padding:12px;border:2px solid var(--bord);border-radius:var(--r);background:var(--surf);}
 .bi.on{border-color:var(--acc);background:var(--acc-l);}
@@ -87,39 +73,27 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
 .bav{width:40px;height:40px;border-radius:50%;background:var(--acc-l);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:var(--acc-t);flex-shrink:0;pointer-events:none;}
 .bi-name{font-size:15px;font-weight:600;pointer-events:none;}
 .bi-comm{font-size:12px;color:var(--txt2);margin-top:2px;pointer-events:none;}
-
-/* RESPONSABLES */
 .resp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.resp-btn{padding:10px 8px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:15px;font-weight:600;color:var(--txt);text-align:center;}
+.resp-btn{padding:10px 8px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:15px;font-weight:600;color:var(--txt);text-align:center;touch-action:manipulation;cursor:pointer;}
 .resp-btn.on{background:var(--acc);color:white;border-color:var(--acc);}
 .resp-btn:active{opacity:.85;}
-
-/* DESTOCKAGE */
 .dest-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.dest-btn{padding:12px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:15px;font-weight:600;text-align:center;}
+.dest-btn{padding:12px;border-radius:var(--r);border:2px solid var(--bord);background:var(--surf);font-family:inherit;font-size:15px;font-weight:600;text-align:center;touch-action:manipulation;cursor:pointer;}
 .dest-btn.on-non{background:var(--acc);color:white;border-color:var(--acc);}
 .dest-btn.on-oui{background:var(--err);color:white;border-color:var(--err);}
 .dest-btn:active{opacity:.85;}
-
-/* BADGES */
 .bdg{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;pointer-events:none;}
 .bok{background:var(--ok-b);color:var(--ok);}
 .berr{background:var(--err-b);color:var(--err);}
 .bwarn{background:var(--warn-b);color:var(--warn);}
 .dot{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;}
-
-/* CARTES PRÊTS */
 .pc{background:var(--surf);border:2px solid var(--bord);border-radius:var(--rl);padding:12px;margin-bottom:10px;}
 .pc-veh{font-weight:700;font-size:17px;margin-bottom:2px;}
 .pc-sub{font-size:13px;color:var(--txt2);margin-bottom:6px;}
 .pc-info{font-size:13px;color:var(--txt2);line-height:1.8;margin-bottom:10px;}
 .pc-foot{display:flex;gap:8px;flex-wrap:wrap;}
 .pc-foot .btn{width:auto;flex:1;margin-bottom:0;padding:12px 16px;font-size:15px;}
-
-/* INFO BOX */
 .ibox{padding:10px 14px;background:var(--acc-l);border-radius:var(--r);border:2px solid rgba(45,91,227,.2);font-size:14px;margin-bottom:10px;line-height:1.6;}
-
-/* MODAL */
 .mo{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:flex-end;}
 .mo.hid{display:none;}
 .md{background:var(--surf);border-radius:20px 20px 0 0;width:100%;padding:22px 18px;}
@@ -127,8 +101,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
 .mp{font-size:15px;color:var(--txt2);margin-bottom:4px;}
 .mf{display:flex;gap:10px;margin-top:16px;}
 .mf .btn{margin-bottom:0;}
-
-/* DIVERS */
 .emp{text-align:center;padding:30px 20px;color:var(--txt2);font-size:15px;}
 .ld{display:inline-block;width:20px;height:20px;border:3px solid var(--bord);border-top-color:var(--acc);border-radius:50%;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg);}}
@@ -148,7 +120,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
   <div class="htitle" id="hdr-title">Prêts Festival</div>
 </div>
 
-<!-- ACCUEIL -->
 <div id="pg-home" class="pg on">
   <div class="tiles">
     <button class="tile" id="tile-veh">
@@ -164,7 +135,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
   </div>
 </div>
 
-<!-- MENU -->
 <div id="pg-menu" class="pg">
   <div class="tiles">
     <button class="tile" id="tile-list">
@@ -179,12 +149,10 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
   </div>
 </div>
 
-<!-- LISTE VÉHICULES -->
 <div id="pg-veh-list" class="pg">
   <div id="veh-list-content"><div class="emp"><div class="ld"></div></div></div>
 </div>
 
-<!-- NOUVEAU PRÊT VÉH -->
 <div id="pg-veh-new" class="pg">
   <div class="steps">
     <div class="stp on" id="vsi0"><div class="stn">1</div></div><div class="ssep"></div>
@@ -192,8 +160,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
     <div class="stp" id="vsi2"><div class="stn">3</div></div><div class="ssep"></div>
     <div class="stp" id="vsi3"><div class="stn">4</div></div>
   </div>
-
-  <!-- STEP 1 : véhicule -->
   <div class="sp on" id="vsp0">
     <div class="step-title">Numéro du véhicule</div>
     <div class="fg">
@@ -209,8 +175,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
       <button class="btn bs" id="btn-veh-rechanger">↩ Changer de numéro</button>
     </div>
   </div>
-
-  <!-- STEP 2 : dates -->
   <div class="sp" id="vsp1">
     <div id="v-recap" class="ibox"></div>
     <div class="step-title">Dates du prêt</div>
@@ -231,8 +195,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
     <button class="btn bp" id="btn-dispo-next" style="display:none">Suivant → Bénévole</button>
     <button class="btn bs" id="btn-vsp1-back">← Retour</button>
   </div>
-
-  <!-- STEP 3 : bénévole -->
   <div class="sp" id="vsp2">
     <div class="step-title">Bénévole emprunteur</div>
     <div class="fg" style="display:flex;gap:8px;align-items:flex-end;">
@@ -245,8 +207,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
       <button class="btn bp" id="btn-vs3next">Suivant →</button>
     </div>
   </div>
-
-  <!-- STEP 4 : confirmation -->
   <div class="sp" id="vsp3">
     <div class="step-title">Confirmer le prêt</div>
     <div id="v-recap-final" class="ibox"></div>
@@ -264,16 +224,12 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
   </div>
 </div>
 
-<!-- LISTE MATÉRIEL -->
 <div id="pg-mat-list" class="pg">
   <div id="mat-list-content"><div class="emp"><div class="ld"></div></div></div>
 </div>
 
-<!-- NOUVEAU PRÊT MAT -->
 <div id="pg-mat-new" class="pg">
   <div class="step-title">Nouveau prêt matériel</div>
-
-  <!-- Zone recherche bénévole -->
   <div id="mb-search-zone">
     <div class="fg">
       <label class="fl">Bénévole emprunteur</label>
@@ -284,11 +240,7 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
     </div>
     <div class="bl" id="mb-list" style="display:none;margin-top:8px;max-height:200px;overflow-y:auto;border:2px solid var(--bord);border-radius:var(--r);"></div>
   </div>
-
-  <!-- Info bénévole sélectionné -->
   <div id="mb-info" style="display:none;margin-bottom:10px;" class="ibox"></div>
-
-  <!-- Formulaire (masqué jusqu'à sélection bénévole) -->
   <div id="mb-form" style="display:none;">
     <div class="fg"><label class="fl">Désignation</label><input type="text" class="fc" id="mdesig" placeholder="Nom du matériel..." autocomplete="off"></div>
     <div class="fg"><label class="fl">Info complémentaire</label><input type="text" class="fc" id="minfo" placeholder="Optionnel..." autocomplete="off"></div>
@@ -315,7 +267,6 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
   </div>
 </div>
 
-<!-- MODAL -->
 <div class="mo hid" id="modal">
   <div class="md">
     <div class="mt" id="m-title"></div>
@@ -329,8 +280,7 @@ button,.tile,.bi,.ch,.resp-btn,.dest-btn{touch-action:manipulation;-webkit-user-
 var API='https://prets-proxy.lemagasingue.workers.dev';
 
 function apiGet(action,cb,err){
-  fetch(API+'?'+action)
-    .then(function(r){return r.json();}).then(cb)
+  fetch(API+'?'+action).then(function(r){return r.json();}).then(cb)
     .catch(function(e){if(err)err(e);else toast('Erreur réseau','err');});
 }
 function apiPost(action,data,cb,err){
@@ -400,23 +350,6 @@ function bindAll(){
   document.getElementById('veh-num').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherVeh();}});
   document.getElementById('sb').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherBenv();}});
   document.getElementById('mb-search').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherMBenv();}});
-  // Délégation sur le conteneur véhicules
-  var vlc=document.getElementById('veh-list-content');
-  vlc.addEventListener('click',function(e){
-    var btn=e.target.closest('button[data-action]');
-    if(!btn)return;
-    e.stopPropagation();
-    if(btn.getAttribute('data-action')==='tpret') tPret(btn.getAttribute('data-id'));
-  });
-
-  // Délégation sur le conteneur matériel
-  var mlc=document.getElementById('mat-list-content');
-  mlc.addEventListener('click',function(e){
-    var btn=e.target.closest('button[data-action]');
-    if(!btn)return;
-    e.stopPropagation();
-    if(btn.getAttribute('data-action')==='retourmat') retourMat(btn.getAttribute('data-id'));
-  });
 }
 
 function loadAll(){
@@ -491,8 +424,8 @@ function dispo(v){
 }
 
 function chercherVeh(){
-  var num=String(document.getElementById('veh-num').value).trim();
   document.getElementById('veh-num').blur();
+  var num=String(document.getElementById('veh-num').value).trim();
   if(!num){toast('Saisissez un numéro','err');return;}
   var n=parseInt(num);
   if(isNaN(n)||n<1||n>68){toast('Numéro entre 1 et 68','err');return;}
@@ -504,8 +437,7 @@ function chercherVeh(){
   if(!found){toast('Véhicule '+n+' introuvable','err');return;}
   var d=dispo(found);
   var lnde=found['NuméroLNDE']||found.NumeroLNDE||'';
-  var box=document.getElementById('v-info');
-  box.style.display='block';
+  var box=document.getElementById('v-info');box.style.display='block';
   if(!d){
     box.innerHTML='<span style="color:var(--err);font-weight:700;">⚠ Véhicule '+lnde+' indisponible</span><br>'+(found.Type||'')+(found.Plaque?' · '+found.Plaque:'');
     document.getElementById('v-confirm').style.display='none';
@@ -560,8 +492,8 @@ function showDM(msg,ok){
 }
 
 function chercherBenv(){
-  var f=document.getElementById('sb').value.trim();
   document.getElementById('sb').blur();
+  var f=document.getElementById('sb').value.trim();
   if(f.length<5){toast('Tapez au moins 5 lettres','err');return;}
   renBenv(f);document.getElementById('bl').style.display='flex';
 }
@@ -575,25 +507,23 @@ function renBenv(f){
     var b=items[j].b,ri=items[j].i,pr=b['Prénom']||b.Prenom||'',ini=(pr.charAt(0)+(b.Nom||'').charAt(0)).toUpperCase(),sel=selB!==null&&B.indexOf(selB)===ri;
     var el=document.createElement('div');
     el.className='bi'+(sel?' on':'');
-    el.innerHTML='<div class="bav">'+ini+'</div><div><div class="bi-name">'+pr+' '+(b.Nom||'')+'</div><div class="bi-comm">'+(b.Commission||'')+'</div></div>'+(sel?'<svg width="20" height="20" viewBox="0 0 24 24" fill="var(--acc)" style="margin-left:auto"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>':'');
+    el.innerHTML='<div class="bav">'+ini+'</div><div><div class="bi-name">'+pr+' '+(b.Nom||'')+'</div><div class="bi-comm">'+(b.Commission||'')+'</div></div>';
     (function(idx){onTap(el,function(){selBenv(idx);});})(ri);
     c.appendChild(el);
   }
 }
 function selBenv(i){
   selB=B[i];
+  var pr=selB['Prénom']||selB.Prenom||'';
   document.getElementById('bl').style.display='none';
   document.getElementById('sb').style.display='none';
   document.getElementById('btn-sb-chercher').style.display='none';
-  var pr=selB['Prénom']||selB.Prenom||'';
-  // Afficher le nom sélectionné dans un ibox au-dessus des boutons
   var existing=document.getElementById('sel-benv-info');
   if(!existing){
     var box=document.createElement('div');
-    box.id='sel-benv-info';
-    box.className='ibox';
-    box.style.marginBottom='10px';
-    document.getElementById('vsp2').insertBefore(box,document.getElementById('bl').nextSibling);
+    box.id='sel-benv-info';box.className='ibox';
+    var btnRow=document.querySelector('#vsp2 .btn-row');
+    document.getElementById('vsp2').insertBefore(box,btnRow);
   }
   document.getElementById('sel-benv-info').innerHTML='✔ <strong>'+pr+' '+selB.Nom+'</strong>'+(selB.Commission?' · '+selB.Commission:'');
   document.getElementById('sel-benv-info').style.display='block';
@@ -603,16 +533,13 @@ function vs3next(){if(!selB){toast('Sélectionnez un bénévole','err');return;}
 function selectResp(nom){
   selResp=nom;
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('resp-'+n).className='resp-btn'+(n===nom?' on':'');});
-  if(selV&&selB) buildRecap();
+  if(selV&&selB)buildRecap();
 }
-
 function fmtD(d){if(!d)return'—';var p=String(d).split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:d;}
-
 function buildRecap(){
   var pr=selB['Prénom']||selB.Prenom||'',lnde=selV['NuméroLNDE']||selV.NumeroLNDE||selV.Plaque||'';
   document.getElementById('v-recap-final').innerHTML='<strong>Véhicule :</strong> '+lnde+(selV.Type?' — '+selV.Type:'')+'<br><strong>Plaque :</strong> '+(selV.Plaque||'—')+'<br><strong>Bénévole :</strong> '+pr+' '+(selB.Nom||'')+'<br><strong>Départ :</strong> '+fmtD(document.getElementById('dd').value)+' à '+document.getElementById('hd').value+'<br><strong>Retour prévu :</strong> '+fmtD(document.getElementById('dr').value)+' à '+document.getElementById('hr').value+(selResp?'<br><strong>Responsable :</strong> '+selResp:'');
 }
-
 function validerVeh(){
   if(!selResp){toast('Choisissez le responsable du prêt','err');return;}
   var btn=document.getElementById('btn-valveh');btn.textContent='Enregistrement...';
@@ -640,6 +567,7 @@ function rstVehForm(){
   initDates();
 }
 
+// Rendu liste véhicules — onclick inline, pas de querySelectorAll, pas d'onTap
 function renVehList(){
   var c=document.getElementById('veh-list-content');if(!c)return;
   var list=[];
@@ -648,13 +576,20 @@ function renVehList(){
   var h='';
   for(var i=0;i<list.length;i++){
     var p=list[i];
-    h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;"><div><div class="pc-veh">'+(p.NumeroLNDE||p.Plaque||'—')+'</div><div class="pc-sub">'+(p.TypeVehicule||'')+(p.TypeVehicule&&p.NomPrenom?' — ':'')+(p.NomPrenom||'')+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
+    var sid=String(p.ID).replace(/'/g,'');
+    h+='<div class="pc">'
+      +'<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">'
+      +'<div><div class="pc-veh">'+(p.NumeroLNDE||p.Plaque||'—')+'</div>'
+      +'<div class="pc-sub">'+(p.TypeVehicule||'')+(p.TypeVehicule&&p.NomPrenom?' — ':'')+(p.NomPrenom||'')+'</div></div>'
+      +'<span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
       +'<div class="pc-info">Départ : '+fmtD(p.DateDepart)+' '+p.HeureDepart+'<br>Retour : '+fmtD(p.DateRetour)+' '+p.HeureRetour+'</div>'
-      +'<div class="pc-foot"><button class="btn bo" data-id="'+p.ID+'" data-action="tpret">✔ Terminer</button></div></div>';
+      +'<div class="pc-foot"><button class="btn bo" onclick="tPret(\''+sid+'\')">✔ Terminer</button></div>'
+      +'</div>';
   }
   c.innerHTML=h;
 }
 
+// Rendu liste matériel — onclick inline
 function renMatList(){
   var c=document.getElementById('mat-list-content');if(!c)return;
   var list=[];
@@ -663,16 +598,22 @@ function renMatList(){
   var h='';
   for(var i=0;i<list.length;i++){
     var p=list[i];
-    h+='<div class="pc"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;"><div><div class="pc-veh">'+p.Designation+'</div><div class="pc-sub">'+p.Benevole+' · Qté : '+p.Quantite+'</div></div><span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
+    var sid=String(p.IDkey).replace(/'/g,'');
+    h+='<div class="pc">'
+      +'<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">'
+      +'<div><div class="pc-veh">'+p.Designation+'</div>'
+      +'<div class="pc-sub">'+p.Benevole+' · Qté : '+p.Quantite+'</div></div>'
+      +'<span class="bdg bwarn"><span class="dot"></span> En cours</span></div>'
       +'<div class="pc-info">Départ : '+fmtD(p.DateDepart)+(p.InfoComplementaire?'<br>Info : '+p.InfoComplementaire:'')+'<br>Déstockage : <strong>'+p.Destockage+'</strong>'+(p.Signature?'<br>Saisie : '+p.Signature:'')+'</div>'
-      +'<div class="pc-foot"><button class="btn bo" data-id="'+p.IDkey+'" data-action="retourmat">✔ Retour</button></div></div>';
+      +'<div class="pc-foot"><button class="btn bo" onclick="retourMat(\''+sid+'\')">✔ Retour</button></div>'
+      +'</div>';
   }
   c.innerHTML=h;
 }
 
 function chercherMBenv(){
-  var f=document.getElementById('mb-search').value.trim();
   document.getElementById('mb-search').blur();
+  var f=document.getElementById('mb-search').value.trim();
   if(f.length<2){toast('Tapez au moins 2 lettres','err');return;}
   filterMBenv(f);document.getElementById('mb-list').style.display='flex';
 }
