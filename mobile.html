@@ -400,6 +400,23 @@ function bindAll(){
   document.getElementById('veh-num').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherVeh();}});
   document.getElementById('sb').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherBenv();}});
   document.getElementById('mb-search').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();chercherMBenv();}});
+  // Délégation sur le conteneur véhicules
+  var vlc=document.getElementById('veh-list-content');
+  vlc.addEventListener('click',function(e){
+    var btn=e.target.closest('button[data-action]');
+    if(!btn)return;
+    e.stopPropagation();
+    if(btn.getAttribute('data-action')==='tpret') tPret(btn.getAttribute('data-id'));
+  });
+
+  // Délégation sur le conteneur matériel
+  var mlc=document.getElementById('mat-list-content');
+  mlc.addEventListener('click',function(e){
+    var btn=e.target.closest('button[data-action]');
+    if(!btn)return;
+    e.stopPropagation();
+    if(btn.getAttribute('data-action')==='retourmat') retourMat(btn.getAttribute('data-id'));
+  });
 }
 
 function loadAll(){
@@ -636,12 +653,6 @@ function renVehList(){
       +'<div class="pc-foot"><button class="btn bo" data-id="'+p.ID+'" data-action="tpret">✔ Terminer</button></div></div>';
   }
   c.innerHTML=h;
-  c.querySelectorAll('button[data-action]').forEach(function(btn){
-    onTap(btn,function(){
-      var id=btn.getAttribute('data-id');
-      if(btn.getAttribute('data-action')==='tpret') tPret(id);
-    });
-  });
 }
 
 function renMatList(){
@@ -657,12 +668,6 @@ function renMatList(){
       +'<div class="pc-foot"><button class="btn bo" data-id="'+p.IDkey+'" data-action="retourmat">✔ Retour</button></div></div>';
   }
   c.innerHTML=h;
-  c.querySelectorAll('button[data-action]').forEach(function(btn){
-    onTap(btn,function(){
-      var id=btn.getAttribute('data-id');
-      if(btn.getAttribute('data-action')==='retourmat') retourMat(id);
-    });
-  });
 }
 
 function chercherMBenv(){
