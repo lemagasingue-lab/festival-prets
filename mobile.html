@@ -364,6 +364,15 @@ function loadAll(){
   apiGet('action=getPrets',function(d){P=Array.isArray(d)?d:[];lp=true;check();renVehList();});
   apiGet('action=getPretsMateriel',function(d){PM=Array.isArray(d)?d:[];updHomeCounts();renMatList();});
 }
+
+function loadPrets(){
+  apiGet('action=getPrets',function(d){
+    P=Array.isArray(d)?d:[];
+    updHomeCounts();
+    renVehList();
+  });
+}
+
 function loadMat(){
   apiGet('action=getPretsMateriel',function(d){PM=Array.isArray(d)?d:[];updHomeCounts();renMatList();});
 }
@@ -448,7 +457,6 @@ function chercherVeh(){
     box.innerHTML='<strong>Véhicule '+lnde+'</strong>'+(found.Type?' — '+found.Type:'')+(found.Plaque?' &nbsp;·&nbsp; '+found.Plaque:'')+(found.Carburant?' &nbsp;·&nbsp; '+found.Carburant:'');
     document.getElementById('v-confirm').style.display='block';
     document.getElementById('v-rechanger').style.display='none';
-    // Masquer le champ de saisie
     document.getElementById('veh-num').style.display='none';
     document.getElementById('btn-veh-chercher').style.display='none';
     selV=found;
@@ -515,7 +523,6 @@ function renBenv(f){
 }
 function selBenv(i){
   selB=B[i];
-  // Masquer liste et champ, afficher juste le nom sélectionné
   document.getElementById('bl').style.display='none';
   document.getElementById('sb').style.display='none';
   document.getElementById('btn-sb-chercher').style.display='none';
@@ -527,7 +534,6 @@ function selectResp(nom){
   selResp=nom;
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('resp-'+n).className='resp-btn'+(n===nom?' on':'');});
   document.getElementById('resp-info').style.display='none';
-  // Mettre à jour le récap si déjà affiché
   if(selV&&selB) buildRecap();
 }
 
@@ -546,6 +552,7 @@ function validerVeh(){
     function(r){btn.textContent='✔ Valider le prêt';if(r.error)toast(r.error,'err');else{toast('Prêt enregistré !','ok');loadAll();navStack=['pg-home'];showPage('pg-home');}},
     function(e){toast('Erreur : '+e.message,'err');btn.textContent='✔ Valider le prêt';});
 }
+
 function rstVehForm(){
   selV=null;selB=null;selResp=null;vgos(0);
   document.getElementById('veh-num').value='';
@@ -600,6 +607,13 @@ function renMatList(){
       +'<div class="pc-foot"><button class="btn bo" data-id="'+p.IDkey+'" data-action="retourmat">✔ Retour</button></div></div>';
   }
   c.innerHTML=h;
+  c.querySelectorAll('button[data-action]').forEach(function(btn){
+    onTap(btn,function(){
+      var id=btn.getAttribute('data-id');
+      var action=btn.getAttribute('data-action');
+      if(action==='retourmat') retourMat(id);
+    });
+  });
 }
 
 function chercherMBenv(){
@@ -627,7 +641,6 @@ function pickMBenv(idx){
   var pr=selMBenv['Prénom']||selMBenv.Prenom||'';
   var info=document.getElementById('mb-info');info.style.display='block';
   info.innerHTML='<strong>'+pr+' '+selMBenv.Nom+'</strong>'+(selMBenv.Commission?' &nbsp;·&nbsp; '+selMBenv.Commission:'');
-  // Masquer liste et champ recherche
   document.getElementById('mb-list').style.display='none';
   document.getElementById('mb-search').style.display='none';
   document.getElementById('btn-mb-chercher').style.display='none';
@@ -665,37 +678,28 @@ function rstMatForm(){
   setDest('Non');
   ['Tef','Ced','Chris','Lorianne'].forEach(function(n){document.getElementById('mresp-'+n).className='resp-btn';});
 }
-function loadPrets(){
-  apiGet('action=getPrets', function(d){
-    P = Array.isArray(d) ? d : [];
-    updHomeCounts();
-    renVehList();
-  });
-}
-function tPret(btn){
-  var id = btn.getAttribute('data-id');
+
+function tPret(id){
   oMod('Terminer le prêt','Confirmer le retour du véhicule ?',
-    '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm" data-id="'+id+'">✔ Confirmer</button>');
+    '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm">✔ Confirmer</button>');
   bindModButtons(function(){
-    apiPost('terminerPret', {pretId:id}, function(r){
-      if(r.error) toast(r.error,'err');
-      else { toast('Terminé !','ok'); loadPrets(); }
+    apiPost('terminerPret',{pretId:id},function(r){
+      if(r.error)toast(r.error,'err');
+      else{toast('Terminé !','ok');loadPrets();}
     });
   });
 }
 
-function retourMat(btn){
-  var id = btn.getAttribute('data-id');
+function retourMat(id){
   oMod('Retour matériel','Confirmer le retour du matériel ?',
-    '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm" data-id="'+id+'">✔ Confirmer</button>');
+    '<button class="btn bs" id="mod-cancel">Annuler</button><button class="btn bo" id="mod-confirm">✔ Confirmer</button>');
   bindModButtons(function(){
-    apiPost('terminerPretMateriel', {id:id}, function(r){
-      if(r.error) toast(r.error,'err');
-      else { toast('Retour enregistré !','ok'); loadMat(); }
+    apiPost('terminerPretMateriel',{id:id},function(r){
+      if(r.error)toast(r.error,'err');
+      else{toast('Retour enregistré !','ok');loadMat();}
     });
   });
 }
-
 
 function bindModButtons(confirmFn){
   setTimeout(function(){
